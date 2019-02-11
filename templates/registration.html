@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h2>Registration</h2>
+
+  <form action="/registered", method = "POST">
+    Please enter your first name:
+    <input type="text" name="fname">
+     <br/> <br/>
+    Please enter your last name:
+    <input type="text" name="lname">
+     <br/> <br/>
+    Please enter your email address:
+    <input type="text" name="email">
+     <br/> <br/>
+     Please enter a password:
+    <input type="text" name="password">
+     <br/> <br/>
+    Please enter your street address:
+    <input type="text" name="street_address">
+     <br/> <br/>
+    Please enter your city:
+    <input type="text" name="city">
+     <br/> <br/>
+    Please enter your two-letter state abbreviation:
+    <input type="text" name="state">
+     <br/> <br/>
+    Please enter your zipcode:
+    <input type="text" name="zipcode">
+     <br/> <br/>
+    Please select your pace:
+    Please selecr your running preference:
+
+    <input type="submit" value ="Please Submit ">
+
+
+  </form>
+
+  
+
+{% endblock %}
