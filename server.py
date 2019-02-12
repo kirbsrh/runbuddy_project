@@ -25,7 +25,7 @@ def index():
 
 
 @app.route("/register")
-def get_user_login_info():
+def get_new_user_info():
     """Show  user registration  page ."""
     
     return render_template("registration.html")
@@ -41,7 +41,7 @@ def login_user():
 def verify_user_login():
     """make sure that password is correct."""
 
-    user_email = request.form.get('user_email')
+    user_email = request.form.get('email')
     password = request.form.get('password')
 
 
@@ -58,7 +58,7 @@ def verify_user_login():
         session["user_id"] = user.user_id
         print(session["user_id"])
         flash("Logged in!")
-        return redirect('/')
+        return redirect('/search')
 
     else:
         flash("Error, please try logging in again.")
