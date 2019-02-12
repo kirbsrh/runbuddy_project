@@ -41,7 +41,7 @@ class User(db.Model):
             nullable=False,
             unique=False,
             )
-    state = db.Column(db.String(2),
+    state = db.Column(db.String(100),
             nullable=False,
             unique=False,
             )
@@ -125,11 +125,11 @@ class Message(db.Model):
             onupdate=func.now(),
             )
     sender = db.relationship('User',
-            foreign_keys = 'User.user_id',
+            foreign_keys = 'Message.sender_id',
             backref = ('sender_messages') 
             )
     receiver = db.relationship('User',
-            foreign_keys = 'User.user_id',
+            foreign_keys = 'Message.receiver_id',
             backref = db.backref('receiver_messages'))
 
     def __repr__(self):
