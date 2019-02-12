@@ -35,10 +35,10 @@ def register_new_user():
     """All new user to complete registration form and save details
     in database.  Save user to session"""
 
-        user = User(email= user_email,password=password)
+    user = User(email= user_email,password=password)
 
-        db.session.add(user)
-        db.session.commit()
+    db.session.add(user)
+    db.session.commit()
     
     
     return redirect("user_login")

@@ -4,8 +4,8 @@ from sqlalchemy import Column, DateTime
 from sqlalchemy.sql import func
 from faker import Faker
 from random import random
-myGenerator = Faker()
-myGenerator.random.seed(5467)
+#myGenerator = Faker()
+#myGenerator.random.seed(5467)
 
 db = SQLAlchemy()
 
@@ -53,7 +53,7 @@ class User(db.Model):
             nullable=False,
             unique=False,
             )
-    pace = db.Column(db.Float,
+    pace = db.Column(db.String,
             nullable=True,
             unique=False,
             )
@@ -66,19 +66,20 @@ class User(db.Model):
         """Show info about the user."""
 
         return "<user_id={} fname={} lname={} email={} zipcode={} run_type={} pace ={}>".format(
-        self.human_id, self.fname, self.lname, self.email, self.zipcode, self.run_type, self.pace)
+        self.user_id, self.fname, self.lname, self.email, self.zipcode, self.run_type, self.pace)
 
-    def __init__(self, name, email, password, street_address, city, state, zipcode, pace, run_type):
-        self.fname = fname
-        self.lname = lname
-        self.email = email
-        self.password = password
-        self.street_address = street_address
-        self.city = city
-        self.state = state
-        self.zipcode = zipcode
-        self.pace = pace
-        self.run_type = run_type
+    # def __init__(self, fname, lname, email, password,):
+    #     self.user_id = user_id
+    #     self.fname = fname
+    #     self.lname = lname
+    #     self.email = email
+    #     self.password = password
+    #     self.street_address = street_address
+    #     self.city = city
+    #     self.state = state
+    #     self.zipcode = zipcode
+    #     self.pace = pace
+    #     self.run_type = run_type
 
 
     @classmethod
@@ -87,9 +88,10 @@ class User(db.Model):
 
         #list of paces to randomly assign to fake users
 
-        pace_list = [6.00, 6:15, 6:30, 6:45, 7:00, 7:15, 7:30,
-        7:45, 8:00, 8:15, 8:30, 8:45, 9:00, 9:15, 9:30, 9:45, 10:00,
-        10:15, 10:30, 10:45, 11:00, 11:15, 11:30, 11:45, 12:00]
+        pace_list = ["6:00", "6:15", "6:30", "6:45",
+         "7:00", "7:15", "7:30", "7:45", "8:00", 
+         "8:15", "8:30", "8:45", "9:00", "9:15", "9:30", "9:45", "10:00",
+        "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00"]
 
         # list of run types to randomly assign to fake users
 
