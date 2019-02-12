@@ -124,8 +124,13 @@ class Message(db.Model):
     time_updated = Column(DateTime(timezone=True),
             onupdate=func.now(),
             )
-    #sender = db.relationship("User",
-            #foreign_keys=)
+    sender = db.relationship('User',
+            foreign_keys = 'User.user_id',
+            backref = ('sender_messages') 
+            )
+    receiver = db.relationship('User',
+            foreign_keys = 'User.user_id',
+            backref = db.backref('receiver_messages'))
 
     def __repr__(self):
         """Show info about the message."""
