@@ -37,8 +37,7 @@ def register_new_user():
 
 
 
-    user_fname = request.form.get('fname')
-    user_lname = request.form.get('lname')
+    user_name = request.form.get('name')
     user_email = request.form.get('email')
     password = request.form.get('password')
     street_address = request.form.get('street_address')
@@ -51,13 +50,12 @@ def register_new_user():
     user = User.query.filter_by(email = user_email).first()
 
     if user != None:
-        return redirect('user_login.html')
+        return redirect("user_login.html")
 
     else:
         user = User(
-            fname = fname,
-            lname = lname,
-            email = email,
+            name = user_name,
+            email = user_email,
             password =password,
             street_address =street_address,
             city = city,
@@ -70,7 +68,7 @@ def register_new_user():
         db.session.commit()
     
     
-    return redirect("user_login")
+    return redirect("/user_login")
 
 
 

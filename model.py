@@ -136,7 +136,7 @@ class Message(db.Model):
         """Show info about the message."""
 
         return "<msg_id={} sender_id={} receiver_id={} time_created={} time_updated={}>".format(
-        self.msg_id, self.senderd_id, self.receiver_id, self.time_created, self.time_updated)
+        self.msg_id, self.sender_id, self.receiver_id, self.time_created, self.time_updated)
 
 
 #################################################################################
