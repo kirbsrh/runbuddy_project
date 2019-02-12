@@ -35,13 +35,44 @@ def register_new_user():
     """All new user to complete registration form and save details
     in database.  Save user to session"""
 
-    user = User(email= user_email,password=password)
 
-    db.session.add(user)
-    db.session.commit()
+
+    user_fname = request.form.get('fname')
+    user_lname = request.form.get('lname')
+    user_email = request.form.get('email')
+    password = request.form.get('password')
+    street_address = request.form.get('street_address')
+    city = request.form.get('city')
+    state = request.form.get('state')
+    zipcode = request.form.get('zipcode')
+    pace = request.form.get('pace')
+    run_type = request.form.get('run_type')
+
+    user = User.query.filter_by(email = user_email).first()
+
+    if user != None:
+        return redirect('user_login.html')
+
+    else:
+        user = User(
+            fname = fname,
+            lname = lname,
+            email = email,
+            password =password,
+            street_address =street_address,
+            city = city,
+            state = state,
+            zipcode = zipcode,
+            pace = pace,
+            run_type = run_type,)
+
+        db.session.add(user)
+        db.session.commit()
     
     
     return redirect("user_login")
+
+
 
 
 @app.route("/user_login")

@@ -1,9 +1,9 @@
 import datetime
+import random
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, DateTime
 from sqlalchemy.sql import func
 from faker import Faker
-from random import random
 #myGenerator = Faker()
 #myGenerator.random.seed(5467)
 
@@ -21,13 +21,9 @@ class User(db.Model):
             primary_key=True,
             autoincrement=True,
             )
-    fname = db.Column(db.String(50), 
+    name = db.Column(db.String(200), 
             nullable=False, 
-            unique=False,
-            )
-    lname = db.Column(db.String(50),
-            nullable=True,
-            unique=False,
+            unique=True,
             )
     email = db.Column(db.String(250),
             nullable=False,
@@ -65,21 +61,9 @@ class User(db.Model):
     def __repr__(self):
         """Show info about the user."""
 
-        return "<user_id={} fname={} lname={} email={} zipcode={} run_type={} pace ={}>".format(
-        self.user_id, self.fname, self.lname, self.email, self.zipcode, self.run_type, self.pace)
+        return "<user_id={} name={} email={} zipcode={} run_type={} pace ={}>".format(
+        self.user_id, self.name, self.email, self.zipcode, self.run_type, self.pace)
 
-    # def __init__(self, fname, lname, email, password,):
-    #     self.user_id = user_id
-    #     self.fname = fname
-    #     self.lname = lname
-    #     self.email = email
-    #     self.password = password
-    #     self.street_address = street_address
-    #     self.city = city
-    #     self.state = state
-    #     self.zipcode = zipcode
-    #     self.pace = pace
-    #     self.run_type = run_type
 
 
     @classmethod
@@ -97,9 +81,8 @@ class User(db.Model):
 
         run_type_list = ["road", "trail", "both"]
 
-        user = User(
-            fname = fake.first_name(),
-            lname = fake.last_name(),
+        user = cls(
+            name = fake.name(),
             email = fake.email(),
             password = fake.password(),
             street_address = fake.street_address(),
@@ -141,6 +124,8 @@ class Message(db.Model):
     time_updated = Column(DateTime(timezone=True),
             onupdate=func.now(),
             )
+    #sender = db.relationship("User",
+            #foreign_keys=)
 
     def __repr__(self):
         """Show info about the message."""
