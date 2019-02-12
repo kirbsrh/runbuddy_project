@@ -30,6 +30,19 @@ def get_new_user_info():
     
     return render_template("registration.html")
 
+@app.route("/register", methods = ["POST"])
+def register_new_user():
+    """All new user to complete registration form and save details
+    in database.  Save user to session"""
+
+        user = User(email= user_email,password=password)
+
+        db.session.add(user)
+        db.session.commit()
+    
+    
+    return redirect("user_login")
+
 
 @app.route("/user_login")
 def login_user():
@@ -49,7 +62,7 @@ def verify_user_login():
     print(user)
 
     if user == None:
-        flash("Registration not found, redirecting to registration.")
+        flash("User information not found, redirecting to registration.")
         return redirect('/register')
 
     elif user.password == password:

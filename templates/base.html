@@ -8,7 +8,14 @@
   RunBuddy
   <hr>
 
-  {% block content %} put your content here {% endblock %}
+  {% block content %} put your content here 
 
+  <ul>
+  {% for message in get_flashed_messages() %}
+    <li>{{ message }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
 </body>
 </html>
