@@ -107,6 +107,33 @@ def verify_user_login():
         return redirect('/user_login')
 
 
+@app.route("/search")
+def display_search_page():
+    """Show search page form """
+
+    return render_template("search.html")
+
+
+@app.route("/search", methods = ["POST"])
+def process_search_request():
+    """Process search form data."""
+
+    zipcode = request.form.get('zipcode')
+    pace = request.form.get('pace')
+
+    #search for users/runners who meet criteria in form
+
+    user = User.query.filter(User.zipcode = zipcode, User.pace = pace).all()
+
+    if user == None:
+        flash("No runners found who meet your criteria, please alter your search.")
+        return redirect('/search')
+
+
+    else:
+        print(user)
+        return redirect('/user_login')   
+
 
 
 
