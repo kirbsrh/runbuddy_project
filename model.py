@@ -2,12 +2,16 @@ import datetime
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, DateTime
 from sqlalchemy.sql import func
-
+from faker import Faker
+from random import random
+myGenerator = Faker()
+myGenerator.random.seed(5467)
 
 db = SQLAlchemy()
 
 
 class User(db.Model):
+
     """User model."""
 
     __tablename__ = "users"
@@ -50,11 +54,11 @@ class User(db.Model):
             unique=False,
             )
     pace = db.Column(db.Float,
-            nullable=False,
+            nullable=True,
             unique=False,
             )
     run_type = db.Column(db.String(50),
-            nullable=False,
+            nullable=True,
             unique=False,
             )
 
@@ -63,6 +67,52 @@ class User(db.Model):
 
         return "<user_id={} fname={} lname={} email={} zipcode={} run_type={} pace ={}>".format(
         self.human_id, self.fname, self.lname, self.email, self.zipcode, self.run_type, self.pace)
+
+    def __init__(self, name, email, password, street_address, city, state, zipcode, pace, run_type):
+        self.fname = fname
+        self.lname = lname
+        self.email = email
+        self.password = password
+        self.street_address = street_address
+        self.city = city
+        self.state = state
+        self.zipcode = zipcode
+        self.pace = pace
+        self.run_type = run_type
+
+
+    @classmethod
+    def seed(cls, fake):
+        """function to seed the database with fake users"""
+
+        #list of paces to randomly assign to fake users
+
+        pace_list = [6.00, 6:15, 6:30, 6:45, 7:00, 7:15, 7:30,
+        7:45, 8:00, 8:15, 8:30, 8:45, 9:00, 9:15, 9:30, 9:45, 10:00,
+        10:15, 10:30, 10:45, 11:00, 11:15, 11:30, 11:45, 12:00]
+
+        # list of run types to randomly assign to fake users
+
+        run_type_list = ["road", "trail", "both"]
+
+        user = User(
+            fname = fake.first_name(),
+            lname = fake.last_name(),
+            email = fake.email(),
+            password = fake.password(),
+            street_address = fake.street_address(),
+            city = fake.city(),
+            state = fake.state(),
+            zipcode = fake.zipcode(),
+            pace = random.choice(pace_list),
+            run_type = random.choice(run_type_list),
+        )
+        user.save()
+
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()    
 
 class Message(db.Model):
     """Message model."""
