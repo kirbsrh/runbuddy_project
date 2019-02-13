@@ -68,8 +68,15 @@ def register_new_user():
         db.session.commit()
     
     
-    return redirect("/user_login")
+    return redirect("/confirmation_page")
 
+@app.route("/confirmation_page")
+def confirm_registered_user():
+    """confirm that the new user is registered 
+        and provide them with nav options"""
+
+
+    return render_template("/confirmation_page.html")
 
 
 

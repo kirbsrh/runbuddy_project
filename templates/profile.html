@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<h1>Runner Profile</h1>
+
+{% for user in user_list %}
+
+
+
+Name: {{ user.name }}<br>
+Zipcode: {{ user.zipcode }}<br>
+Pace: {{ user.pace }}
+Run type preference: {{user.run_type}}
+
+{% endfor %}
+
+
+
+
+{% endblock %}
