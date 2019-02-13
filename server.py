@@ -82,9 +82,12 @@ def register_new_user():
 
 @app.route("/profile")
 def show_runner_profile():
-    """display the profile of the requested user"""
+    """display the profile of the user"""
 
-    return render_template("/profile.html")
+    user = User.query.get(session['user_id'])
+    print(user)
+
+    return render_template("/profile.html", user = user)
 
 #@app.route("/profile", methods = ["POST"])
 #def 
@@ -106,31 +109,27 @@ def verify_user_login():
 
 
     user = User.query.filter_by(email = user_email).first()
-    print(user)
+    
 
+
+
+    
     if user == None:
         flash("User information not found, redirecting to registration.")
         return redirect('/register')
 
     elif user.password == password:
-        
 
-        session["user_id"] = user.user_id
-        print(session["user_id"])
+        session['user_id'] = user.user_id 
+
+        user_name = user.name
+        
         flash("Logged in!")
-        return redirect('/options')
+        return render_template('/options.html', user_name = user_name)
 
     else:
         flash("Error, please try logging in again.")
         return redirect('/user_login')
-
-@app.route("/options")
-def display_options():
-    """Show a logged in user their options in the 
-    form of other links"""
-
-    return render_template("options.html")
-
 
 
 @app.route("/search")
