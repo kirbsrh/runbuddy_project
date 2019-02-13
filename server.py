@@ -66,17 +66,28 @@ def register_new_user():
 
         db.session.add(user)
         db.session.commit()
-    
-    
-    return redirect("/confirmation_page")
 
-@app.route("/confirmation_page")
-def confirm_registered_user():
+        
+    
+    
+    return render_template("/confirmation_page.html")
+
+#@app.route("/confirmation_page")
+#def confirm_registered_user():
     """confirm that the new user is registered 
         and provide them with nav options"""
 
 
-    return render_template("/confirmation_page.html")
+   # return render_template("/confirmation_page.html")
+
+@app.route("/profile")
+def show_runner_profile():
+    """display the profile of the requested user"""
+
+    return render_template("/profile.html")
+
+#@app.route("/profile", methods = ["POST"])
+#def 
 
 
 
@@ -107,11 +118,19 @@ def verify_user_login():
         session["user_id"] = user.user_id
         print(session["user_id"])
         flash("Logged in!")
-        return redirect('/search')
+        return redirect('/options')
 
     else:
         flash("Error, please try logging in again.")
         return redirect('/user_login')
+
+@app.route("/options")
+def display_options():
+    """Show a logged in user their options in the 
+    form of other links"""
+
+    return render_template("options.html")
+
 
 
 @app.route("/search")
@@ -140,26 +159,7 @@ def process_search_request():
 
     else:
         
-        return render_template("display_runner_info.html", user_list = user_list) 
-
-
-# @app.route("/display_runner_info")
-# def user_list():
-#     """Show list of runners who meet search criteria."""
-
-#     user= User.query.get(user_id)
-
-#     zipcode = user.zipcode
-#     pace = user.pace
-#     name = user.name
-
-#     return render_template("display_runner_info.html", zipcode = zipcode,
-#         pace = pace, name = name)
-
-
-
-
-      
+        return render_template("display_runner_info.html", user_list = user_list)     
 
 
 
