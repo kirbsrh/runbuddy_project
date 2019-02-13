@@ -123,16 +123,36 @@ def process_search_request():
 
     #search for users/runners who meet criteria in form
 
-    user = User.query.filter(User.zipcode = zipcode, User.pace = pace).all()
+    user_list = User.query.filter_by(zipcode = zipcode, pace = pace).all()
+    print(user_list)
 
-    if user == None:
+    if user_list == None:
         flash("No runners found who meet your criteria, please alter your search.")
         return redirect('/search')
 
 
     else:
-        print(user)
-        return redirect('/user_login')   
+        
+        return render_template("display_runner_info.html", user_list = user_list) 
+
+
+# @app.route("/display_runner_info")
+# def user_list():
+#     """Show list of runners who meet search criteria."""
+
+#     user= User.query.get(user_id)
+
+#     zipcode = user.zipcode
+#     pace = user.pace
+#     name = user.name
+
+#     return render_template("display_runner_info.html", zipcode = zipcode,
+#         pace = pace, name = name)
+
+
+
+
+      
 
 
 

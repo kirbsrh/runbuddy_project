@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<h1>Runner Information</h1>
+
+{% for user in user_list %}
+
+Name: {{ user.name }}<br>
+Zipcode: {{ user.zipcode }}<br>
+Pace: {{ user.pace }}
+
+{% endfor %}
+
+
+
+
+{% endblock %}
