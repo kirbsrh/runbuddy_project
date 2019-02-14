@@ -187,8 +187,62 @@ def show_message_form(user_id):
 
     return render_template("/send_message.html", name = name)
 
-# @app.route("/send_message", methods = ["POST"])
-# def send_message():
+@app.route("/send_message", methods = ["POST"])
+def send_message(sender_id, user_id):
+    """Send message from sender to receiver and store message in DB"""
+
+    #data stored in the session is that of the user who is logged in
+    #the user who is logged in is the sender
+
+    sender_id = session['user_id']
+    print(sender_id)
+
+    #get the user object of the person we are sending the message to
+    user = User.query.get(user_id)
+
+    #set the user_id of the user object equal to the variable receiver_id
+    receiver_id = user.user_id
+    print(receiver_id)
+
+    #get message from form and save it as message variable
+    message = request.form.get('message')
+
+    #check to make sure there is a message before adding to DB
+    if message != None:
+
+        #set query equal to a variable
+        sql = """"INSERT INTO messages (sender_id, receiver_id, message")
+        VALUES (:sender_id, :receiver_id, :message)"""
+
+        #execute query with variables
+        db.session.execute(
+        sql, {
+        "sender_id" : sender_id,
+        "receiver_id" : receiver_id,
+        "message" : message,
+            }
+        )
+
+        # db.session.execute("""INSERT INTO messages (sender_id, receiver_id, message")
+        #     VALUES ('sender_id', 'receiver_id', 'message')""")
+
+        #save DB entry!
+        db.session.commit()
+
+        #make sure the user knows that their message was sent
+        flash("Message successfully sent!")
+
+        # redirect to options page to see if user wants to do anything else
+        return redirect("/options.html")
+
+
+
+
+
+
+
+
+
 
 
 @app.route("/logout")
