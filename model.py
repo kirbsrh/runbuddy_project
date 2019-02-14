@@ -1,4 +1,5 @@
 import datetime
+import geocoder
 import random
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, DateTime
@@ -49,6 +50,14 @@ class User(db.Model):
             nullable=False,
             unique=False,
             )
+    # #lat = db.Column(db.Float, 
+    #         nullable=True,
+    #         unique=False,
+    #         )
+    # lng = db.Column(db.Float,
+    #         nullable=True,
+    #         unique=False,
+    #         )
     pace = db.Column(db.String,
             nullable=True,
             unique=False,
@@ -61,8 +70,8 @@ class User(db.Model):
     def __repr__(self):
         """Show info about the user."""
 
-        return "<user_id={} name={} email={} zipcode={} run_type={} pace ={}>".format(
-        self.user_id, self.name, self.email, self.zipcode, self.run_type, self.pace)
+        return "<user_id={} name={} email={} zipcode={}".format(
+        self.user_id, self.name, self.email, self.zipcode)
 
 
 
@@ -80,6 +89,8 @@ class User(db.Model):
         # list of run types to randomly assign to fake users
 
         run_type_list = ["road", "trail", "both"]
+
+        #lat = 
 
         user = cls(
             name = fake.name(),
@@ -135,8 +146,8 @@ class Message(db.Model):
     def __repr__(self):
         """Show info about the message."""
 
-        return "<msg_id={} sender_id={} receiver_id={} time_created={} time_updated={}>".format(
-        self.msg_id, self.sender_id, self.receiver_id, self.time_created, self.time_updated)
+        return "<msg_id={} sender_id={} receiver_id={}>".format(
+        self.msg_id, self.sender_id, self.receiver_id)
 
 
 #################################################################################
