@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<h1>RunBuddy Logout</h1>
+
+<form action="/logout", method = "POST">
+    Are you sure you want to logout? <br><br><br>
+    <input type="submit" name="submit_button" value="Logout">
+    <input type="submit" name="submit_button" value="Cancel">
+</form>
+  
+
+
+
+{% endblock %}
