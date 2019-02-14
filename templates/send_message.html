@@ -3,7 +3,9 @@
 
   <h2>Send a message to {{name}}!</h2>
 
-  <form action="/send_message", >
+  <form action="/send_message", method = "POST" >
+
+    <input type="hidden" name="receiver_id" value="{{user_id}}">
     Enter your message below:<br><br>
     <textarea name="message" rows="10" cols="30">
 
