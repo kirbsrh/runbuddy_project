@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+  <h1>Is {{name}} your new RunBuddy?</h1>
+
+  <form action="/user_info", >
+
+    Name: {{name}}<br>
+    City: {{city}}<br>
+    Pace: {{pace}} <br><br>
+    Run type preference: {{run_type}}<br><br>
+    <a href="/send_message">Send{{name}}a message!</a><br>
+  
+
+  </form>
+
+
+{% endblock %}

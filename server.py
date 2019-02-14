@@ -86,6 +86,7 @@ def show_runner_profile():
     return render_template("/profile.html", user = user)
 
 
+
 @app.route("/user_login")
 def login_user():
     """Allow existing user to view login page."""
@@ -156,7 +157,27 @@ def process_search_request():
     else:
         
         return render_template("display_runner_info.html",
-         user_list = user_list)  
+         user_list = user_list)
+
+
+@app.route("/user_info/<user_id>")
+def show_specific_user_profile(user_id):
+
+    user = User.query.get(user_id)
+
+    name = user.name
+    city = user.city
+    pace = user.pace
+    run_type =user.run_type
+
+    return render_template("/user_info.html", name = name,
+     city = city, pace = pace, run_type = run_type)
+
+
+# @app.route("/user", methods = ["POST"])
+# def display_matched_runners():
+
+
 
 @app.route("/logout")
 def confirm_logout_intention():
@@ -166,8 +187,6 @@ def confirm_logout_intention():
 
 @app.route("/logout", methods = ["POST"])
 def take_logout_form_action():
-
-
 
     #check to see which button is pressed
     if request.form['submit_button'] == "Logout":

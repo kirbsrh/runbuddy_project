@@ -2,18 +2,24 @@
 {% block content %}
 
 
+<form action="/user_info">
 
 <h1>Runner Information</h1>
 
 {% for user in user_list %}
 
 
+  <li>
+        <a href="/user_info/{{ user.user_id }}">{{ user.name }}</a><br>
+        Name: {{ user.name }}<br>
+        Zipcode: {{ user.zipcode }}<br>
+        Pace: {{ user.pace }} <br><br>
 
-Name: {{ user.name }}<br>
-Zipcode: {{ user.zipcode }}<br>
-Pace: {{ user.pace }}
+</li>
 
 {% endfor %}
+
+</form>
 
 
 
