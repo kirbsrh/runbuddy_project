@@ -173,9 +173,15 @@ def show_specific_user_profile(user_id):
     return render_template("/user_info.html", name = name,
      city = city, pace = pace, run_type = run_type)
 
+@app.route("/send_message")
+def show_message_form():
+    """Display the form to send a message to a user"""
 
-# @app.route("/user", methods = ["POST"])
-# def display_matched_runners():
+
+    return render_template("/send_message.html")
+
+@app.route("/send_message", methods = ["POST"])
+def send_message():
 
 
 
