@@ -162,6 +162,8 @@ def process_search_request():
 
 @app.route("/user_info/<user_id>")
 def show_specific_user_profile(user_id):
+    """Allow user to view the profile details of a runner
+    who appears in their search results"""
 
     user = User.query.get(user_id)
 
@@ -169,20 +171,24 @@ def show_specific_user_profile(user_id):
     city = user.city
     pace = user.pace
     run_type =user.run_type
+    user_id = user.user_id
 
     return render_template("/user_info.html", name = name,
-     city = city, pace = pace, run_type = run_type)
+     city = city, pace = pace, run_type = run_type, user_id = user_id)
 
-@app.route("/send_message")
-def show_message_form():
+@app.route("/send_message/<user_id>")
+def show_message_form(user_id):
     """Display the form to send a message to a user"""
 
+    user = User.query.get(user_id)
+    print(user)
 
-    return render_template("/send_message.html")
+    name = user.name
 
-@app.route("/send_message", methods = ["POST"])
-def send_message():
+    return render_template("/send_message.html", name = name)
 
+# @app.route("/send_message", methods = ["POST"])
+# def send_message():
 
 
 @app.route("/logout")

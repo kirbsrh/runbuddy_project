@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h2>Send a message to {{user.name}}</h2>
+  <h2>Send a message to {{name}}!</h2>
 
-  <form action="/messages", method = "POST">
-    Please enter your full name:
-    <input type="text" name="message">
+  <form action="/send_message", >
+    Enter your message below:<br><br>
+    <textarea name="message" rows="10" cols="30">
+
+    </textarea>
+    <br><br>
+ 
+    <input type="submit" value ="Send Message! ">   
 
 
 
