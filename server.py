@@ -199,7 +199,7 @@ def send_message():
     #check to make sure there is a message before adding to DB
     if message == None:
         flash("Error!  Your message appears to be blank.  Please try again.")
-        return redirect("/send_message.html")
+        return redirect("/send_message")
 
     else:
 

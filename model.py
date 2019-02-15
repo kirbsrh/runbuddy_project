@@ -54,11 +54,7 @@ class User(db.Model):
     #         nullable=False,
     #         unique=True,
     #         )
-    # #lat = db.Column(db.Float, 
-    #         nullable=True,
-    #         unique=False,
-    #         )
-    # lng = db.Column(db.Float,
+    # #latlong = db.Column(db.Float, 
     #         nullable=True,
     #         unique=False,
     #         )
