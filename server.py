@@ -1,4 +1,5 @@
 """RunBuddy Routes"""
+import geocoder
 
 from jinja2 import StrictUndefined
 
@@ -46,22 +47,33 @@ def register_new_user():
     pace = request.form.get('pace')
     run_type = request.form.get('run_type')
 
+    #add address components together to allow for conversion to lat/long pair
+    address = street_address + ", " + city + ", " + state + " " + zipcode
+
+    #get lat long pair from address
+    g = geocoder.osm(address)
+    lat_long_pair = g.latlng 
+    lat = lat_long_pair[0]
+    lng = lat_long_pair[1]
+
+    #user email is unique, use this to check for existing users
     user = User.query.filter_by(email = user_email).first()
 
+    # if the user is already found in the DB reroute to login
     if user != None:
         return redirect("user_login.html")
-
+        
+    #user info is not found, instantiate user and add to DB
     else:
         user = User(
             name = user_name,
             email = user_email,
             password =password,
-            street_address =street_address,
-            city = city,
-            state = state,
-            zipcode = zipcode,
+            lat = lat,
+            lng = lng,
             pace = pace,
-            run_type = run_type,)
+            run_type = run_type,
+            )
 
         db.session.add(user)
         db.session.commit()

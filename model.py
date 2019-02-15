@@ -34,27 +34,6 @@ class User(db.Model):
             nullable=False,
             unique=False,
             )
-    # street_address = db.Column(db.String(250),
-    #         nullable=False,
-    #         unique=False,
-    #         )
-    # city = db.Column(db.String(250),
-    #         nullable=False,
-    #         unique=False,
-    #         )
-    # state = db.Column(db.String(100),
-    #         nullable=False,
-    #         unique=False,
-    #         )
-    # zipcode = db.Column(db.Integer,
-    #         nullable=False,
-    #         unique=False,
-    #         )
-    # address = db.Column(db.String(300),
-    #         nullable=False,
-    #         unique=True,
-    #         )
-
     lat = db.Column(db.Float, 
             nullable=False,
             )
@@ -95,7 +74,7 @@ class User(db.Model):
 
         #looping over lat longs and assigning to users
 
-        lat_lng_file = open("lat_long_data.txt")
+        lat_lng_file = open("seed_data/lat_long_data.txt")
         for row in lat_lng_file:
             row = row.rstrip()
             lat, lng = row.split(",")
@@ -109,11 +88,6 @@ class User(db.Model):
                 name = fake.name(),
                 email = fake.email(),
                 password = fake.password(),
-                # street_address = fake.street_address(),
-                # city = fake.city(),
-                # state = fake.state(),
-                # zipcode = fake.zipcode(),
-                #address = random.choice(address_list),
                 lat = lat,
                 lng = lng,
                 pace = random.choice(pace_list),
