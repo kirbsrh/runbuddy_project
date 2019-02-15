@@ -34,30 +34,33 @@ class User(db.Model):
             nullable=False,
             unique=False,
             )
-    street_address = db.Column(db.String(250),
-            nullable=False,
-            unique=False,
-            )
-    city = db.Column(db.String(250),
-            nullable=False,
-            unique=False,
-            )
-    state = db.Column(db.String(100),
-            nullable=False,
-            unique=False,
-            )
-    zipcode = db.Column(db.Integer,
-            nullable=False,
-            unique=False,
-            )
+    # street_address = db.Column(db.String(250),
+    #         nullable=False,
+    #         unique=False,
+    #         )
+    # city = db.Column(db.String(250),
+    #         nullable=False,
+    #         unique=False,
+    #         )
+    # state = db.Column(db.String(100),
+    #         nullable=False,
+    #         unique=False,
+    #         )
+    # zipcode = db.Column(db.Integer,
+    #         nullable=False,
+    #         unique=False,
+    #         )
     # address = db.Column(db.String(300),
     #         nullable=False,
     #         unique=True,
     #         )
-    # #latlong = db.Column(db.Float, 
-    #         nullable=True,
-    #         unique=False,
-    #         )
+
+    lat = db.Column(db.Float, 
+            nullable=False,
+            )
+    lng = db.Column(db.Float,
+            nullable=False,
+            )
     pace = db.Column(db.String,
             nullable=True,
             unique=False,
@@ -70,29 +73,14 @@ class User(db.Model):
     def __repr__(self):
         """Show info about the user."""
 
-        return "<user_id={} name={} email={} zipcode={}".format(
-        self.user_id, self.name, self.email, self.zipcode)
+        return "<user_id={} name={} email={} password={}".format(
+        self.user_id, self.name, self.email, self.password)
 
 
 
     @classmethod
     def seed(cls, fake):
         """function to seed the database with fake users"""
-
-        #create list of real addresses from addresses scraped and stored
-        #move addresses from text file into list
-
-        address_list = []
-
-        address_file = open('test_data.txt')
-
-        for line in address_file:
-            address_list.append(line)
-
-        print(address_list)
-        address_file.close()
-        return address_list
-
 
         #list of paces to randomly assign to fake users
 
@@ -105,21 +93,33 @@ class User(db.Model):
 
         run_type_list = ["road", "trail", "both"]
 
-        #lat = 
+        #looping over lat longs and assigning to users
 
-        user = cls(
-            name = fake.name(),
-            email = fake.email(),
-            password = fake.password(),
-            street_address = fake.street_address(),
-            city = fake.city(),
-            state = fake.state(),
-            zipcode = fake.zipcode(),
-            #address = random.choice(address_list),
-            pace = random.choice(pace_list),
-            run_type = random.choice(run_type_list),
-        )
-        user.save()
+        lat_lng_file = open("lat_long_data.txt")
+        for row in lat_lng_file:
+            row = row.rstrip()
+            lat, lng = row.split(",")
+       
+            lat = lat[1:]
+        
+            lng = lng[:-1]
+
+
+            user = cls(
+                name = fake.name(),
+                email = fake.email(),
+                password = fake.password(),
+                # street_address = fake.street_address(),
+                # city = fake.city(),
+                # state = fake.state(),
+                # zipcode = fake.zipcode(),
+                #address = random.choice(address_list),
+                lat = lat,
+                lng = lng,
+                pace = random.choice(pace_list),
+                run_type = random.choice(run_type_list),
+            )
+            user.save()
 
 
     def save(self):
