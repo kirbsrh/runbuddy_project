@@ -68,24 +68,6 @@ def register_new_user():
 
     return render_template("/confirmation_page.html")
 
-#@app.route("/confirmation_page")
-#def confirm_registered_user():
-    """confirm that the new user is registered 
-        and provide them with nav options"""
-
-
-   # return render_template("/confirmation_page.html")
-
-@app.route("/profile")
-def show_runner_profile():
-    """display the profile of the user saved in the session."""
-
-    user = User.query.get(session['user_id'])
-    print(user)
-
-    return render_template("/profile.html", user = user)
-
-
 
 @app.route("/user_login")
 def login_user():
@@ -124,6 +106,16 @@ def verify_user_login():
     else:
         flash("Error, please try logging in again.")
         return redirect('/user_login')
+
+@app.route("/profile")
+def show_runner_profile():
+    """display the profile of the user saved in the session."""
+   
+    user = User.query.get(session['user_id'])
+    print(user)
+
+    return render_template("/profile.html", user = user)
+
 
 
 @app.route("/search")
@@ -194,16 +186,12 @@ def send_message():
 
     #data stored in the session is that of the user who is logged in
     #the user who is logged in is the sender
-
     sender_id = session['user_id']
-    print(sender_id)
+    #print(sender_id)
 
-    #get the user object of the person we are sending the message to
-    
-
-    #set the user_id of the user object equal to the variable receiver_id
+    #set the receiver id from the hidden form equal to the variable receiver_id
     receiver_id = request.form.get('receiver_id')
-    print(receiver_id)
+    #print(receiver_id)
 
     #get message from form and save it as message variable
     message = request.form.get('message')
@@ -222,31 +210,45 @@ def send_message():
             message = message,
            )
 
+        #Add and Save to DB
         db.session.add(new_message)
         db.session.commit()
 
-                #make sure the user knows that their message was sent
+        #make sure the user knows that their message was sent
         flash("Message successfully sent!")
 
         # redirect to search page to see if user wants to do anything else
-        return redirect("/search.html")
+        return redirect("/search")
+
+@app.route('/messages')
+def show_messages():
+
+    #get user info from session to check for messages
+    user = User.query.get(session['user_id'])
+
+    #query data base to see if user_id matches receiver_id in Msg table
+    #save query as a list 
+    message_list = Message.query.filter(Message.receiver_id == user.user_id).all()
 
 
-        #set query equal to a variable
-        # sql = """"INSERT INTO messages (sender_id, receiver_id, message")
-        # VALUES (:sender_id, :receiver_id, :message)"""
+    #check to see if message list is empty or none, redirect to search
+    if message_list == None:
+        flash("You do not have any messages at this time. Find someone to message!")
+        return redirect("/search")
 
-        # #execute query with variables
-        # db.session.execute(
-        # sql, {
-        # "sender_id" : sender_id,
-        # "receiver_id" : receiver_id,
-        # "message" : message,
-        #     }
-        # )
+    # if there are messages then loop over messages to pull out details
+    else:
+        for message in message_list:
+            sender_id = message.sender_id
+            sender_info = User.query.get(sender_id)
+            sender_name = sender_info.name
 
-        # db.session.execute("""INSERT INTO messages (sender_id, receiver_id, message")
-        #     VALUES ('sender_id', 'receiver_id', 'message')""")
+        return render_template("messages.html", message_list = message_list,
+             sender_name = sender_name)
+
+# @app.route('/messages', methods = ["POST"])
+# def reply_to_message():
+
 
 
 

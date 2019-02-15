@@ -3,6 +3,31 @@
 
 
 
+<form action="/messages", method = "POST">
+
+<h1>My Messages</h1>
+
+{% for message in message_list %}
+
+
+
+
+
+  <li>
+        Sent from: {{sender_name}}<br>
+        Sent time: {{ message.time_created }}<br>
+        Message: {{ message.message }} <br><br>
+
+        <br/><br/>
+        <input type="submit" name = "reply" value ="Reply">
+
+</li>
+
+{% endfor %}
+
+</form>
+
+
 
 
 
