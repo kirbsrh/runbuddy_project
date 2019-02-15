@@ -3,7 +3,7 @@
 
 
 
-<form action="/messages", method = "POST">
+<form action="/message">
 
 <h1>My Messages</h1>
 
@@ -18,8 +18,10 @@
         Sent time: {{ message.time_created }}<br>
         Message: {{ message.message }} <br><br>
 
+        <input type="hidden" name="sender_id" value="{{sender_id}}">
+
         <br/><br/>
-        <input type="submit" name = "reply" value ="Reply">
+        <a href="/send_message/{{sender_id}}">Reply to {{sender_name}}</a><br>
 
 </li>
 

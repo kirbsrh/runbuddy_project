@@ -50,6 +50,10 @@ class User(db.Model):
             nullable=False,
             unique=False,
             )
+    # address = db.Column(db.String(300),
+    #         nullable=False,
+    #         unique=True,
+    #         )
     # #lat = db.Column(db.Float, 
     #         nullable=True,
     #         unique=False,
@@ -79,6 +83,21 @@ class User(db.Model):
     def seed(cls, fake):
         """function to seed the database with fake users"""
 
+        #create list of real addresses from addresses scraped and stored
+        #move addresses from text file into list
+
+        address_list = []
+
+        address_file = open('test_data.txt')
+
+        for line in address_file:
+            address_list.append(line)
+
+        print(address_list)
+        address_file.close()
+        return address_list
+
+
         #list of paces to randomly assign to fake users
 
         pace_list = ["6:00", "6:15", "6:30", "6:45",
@@ -100,6 +119,7 @@ class User(db.Model):
             city = fake.city(),
             state = fake.state(),
             zipcode = fake.zipcode(),
+            #address = random.choice(address_list),
             pace = random.choice(pace_list),
             run_type = random.choice(run_type_list),
         )

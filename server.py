@@ -244,12 +244,7 @@ def show_messages():
             sender_name = sender_info.name
 
         return render_template("messages.html", message_list = message_list,
-             sender_name = sender_name)
-
-# @app.route('/messages', methods = ["POST"])
-# def reply_to_message():
-
-
+             sender_name = sender_name, sender_id = sender_id)
 
 
 @app.route("/logout")
