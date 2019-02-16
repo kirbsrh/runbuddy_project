@@ -141,16 +141,43 @@ def display_search_page():
 def process_search_request():
     """Process search form data."""
 
-    #set zipcode to zipcode query
-    zipcode = request.form.get('zipcode')
+    #set radius to distance selected in form
+    distance = request.form.get('distance')
+    radius = int(distance)
 
     #set pace to pace query
     pace = request.form.get('pace')
 
+    #calculate square grid for search using userid saved in session for lat/long center point
+    center_user = session['user_id']
+
+    my_lat = center_user.lat
+
+    my_long =center_user.lng 
+
+    df = (radius/69)
+
+    dl = (df)/(cos(my_lat))
+
+    my_lat - df = southernmost_lat
+
+    my_lat + df = northernmost_lat
+
+    my_long - dl = westernmost_long
+
+    my_long + dl = easternmost_long
+
+
+
+
+
+
     #search for users/runners who meet criteria in form
     # save query as object list
 
-    user_list = User.query.filter_by(zipcode = zipcode, pace = pace).all()
+    #user_list = User.query.filter(User.lat.....)
+
+    
     
     # if the query has no results let the user know
     if user_list == None:
