@@ -62,7 +62,7 @@ def register_new_user():
     # if the user is already found in the DB reroute to login
     if user != None:
         return redirect("user_login.html")
-        
+
     #user info is not found, instantiate user and add to DB
     else:
         user = User(
@@ -172,13 +172,12 @@ def show_specific_user_profile(user_id):
     user = User.query.get(user_id)
 
     name = user.name
-    city = user.city
     pace = user.pace
     run_type =user.run_type
     user_id = user.user_id
 
     return render_template("/user_info.html", name = name,
-     city = city, pace = pace, run_type = run_type, user_id = user_id)
+        pace = pace, run_type = run_type, user_id = user_id)
 
 @app.route("/send_message/<user_id>")
 def show_message_form(user_id):

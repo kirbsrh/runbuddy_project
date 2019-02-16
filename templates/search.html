@@ -4,10 +4,19 @@
   <h2>Search</h2>
 
   <form action="/search", method = "POST">
-    Please enter the zipcode that you would like to search:
-    <input type="text" name="zipcode">
+    I want to search for runners within <select name = "distance">
+                                        <option value = "1">1</option>
+                                        <option value = "3">3</option>
+                                        <option value = "5">5</option>
+                                        <option value = "7">7</option>
+                                        <option value = "10">10</option>
+                                        <option value = "15">15</option>
+                                        <option value = "20">20</option>
+                                        <option value = "25">25</option>
+                                        </select>mile(s) of my address.
+    
      <br/> <br/>
-    Please select the pace closest to your average mile pace in minutes below:
+    I am looking for runners who run, on average, a 
    <select name = "pace">
     <option value = "6:00">6:00</option>
     <option value = "6:15">6:15</option>
@@ -34,11 +43,11 @@
     <option value = "11:30">11:30</option>
     <option value = "11:45">11:45</option>
     <option value = "12:00">12:00</option>
-    </select>
+    </select>minutes/mile pace.
     <br/><br/>
 
     <br/><br/>
-    <input type="submit" name = "submit" value ="Search ">
+    <input type="submit" name = "submit" value ="Find my buddy! ">
 
 
   </form>
