@@ -258,28 +258,61 @@ def send_message():
 @app.route('/messages')
 def show_messages():
 
-    #get user info from session to check for messages
-    user = User.query.get(session['user_id'])
+    
+    #check to see is user is logged in
+    if 'user_id' in session:
 
-    #query data base to see if user_id matches receiver_id in Msg table
-    #save query as a list 
-    message_list = Message.query.filter(Message.receiver_id == user.user_id).all()
+        #get user info from session to check for messages
+        user = User.query.get(session['user_id'])
 
+        #query data base to see if user_id matches receiver_id in Msg table
+        #save query as a list 
+        message_list = Message.query.filter(Message.receiver_id == user.user_id).all()
 
-    #check to see if message list is empty or none, redirect to search
-    if message_list == None:
-        flash("You do not have any messages at this time. Find someone to message!")
-        return redirect("/search")
+    
+
+        #check to see if message list is empty or none, redirect to search
+        if message_list == None:
+            flash("You do not have any messages at this time. Find someone to message!")
+            return redirect("/profile")
 
     # if there are messages then loop over messages to pull out details
-    else:
-        for message in message_list:
-            sender_id = message.sender_id
-            sender_info = User.query.get(sender_id)
-            sender_name = sender_info.name
+        else:
+            for message in message_list:
+                sender_id = message.sender_id
+                sender_info = User.query.get(sender_id)
+                sender_name = sender_info.name
 
-        return render_template("messages.html", message_list = message_list,
+            return render_template("messages.html", message_list = message_list,
              sender_name = sender_name, sender_id = sender_id)
+
+    else:
+
+           #if user not logged in, redirect to login
+        flash("You must be logged in to view your messages.  Please login.")
+        return redirect("/user_login")
+
+@app.route("/change_details")
+def change_user_details():
+    """display the profile of the user saved in the session and allow them
+    to view and make changes."""
+
+    #check to see if user is logged in
+    if 'user_id' in session:
+
+        user = User.query.get(session['user_id'])
+
+        
+        
+
+        return render_template("/change_details.html", user = user)
+    else:
+
+           #if user not logged in, redirect to login
+        flash("You must be logged in to view your messages.  Please login.")
+        return redirect("/user_login")
+
+
 
 
 @app.route("/logout")
