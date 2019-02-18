@@ -302,10 +302,24 @@ def change_user_details():
 
         user = User.query.get(session['user_id'])
 
-        
-        
+        user_lat = user.lat
+        user_lng = user.lng
 
-        return render_template("/change_details.html", user = user)
+        #use lat lng details to get address info
+        user_address_info = geocoder.osm([user_lat, user_lng], method = 'reverse')
+
+        housenumber = user_address_info.housenumber
+        street = user_address_info.street
+        city = user_address_info.city
+        state = user_address_info.state
+        zipcode = user_address_info.postal
+
+        #use string concatenation to recreate and display user address
+        user_address = housenumber + " " + street + ", " + city + ", " + state + " " + zipcode
+
+        
+        return render_template("/change_details.html", user = user,
+            user_address = user_address)
     else:
 
            #if user not logged in, redirect to login

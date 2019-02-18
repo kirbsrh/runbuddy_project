@@ -12,8 +12,40 @@
 
 
 Name: {{ user.name }}<br>
+Email address: {{user.email}}<br>
+Address: {{user_address}}<br>
 Pace: {{ user.pace }} <br>
-Run type preference: {{user.run_type}} <br><br><br><br>
+Run type preference: {{user.run_type}} <br>
+<br><br>
+
+  <form action="/change_details", method = "POST">
+    Do you need to update your name?
+    <input type="radio" name="name" value="yes">Yes
+    <input type="radio" name="name" value="no">No<br>
+    
+     <br/> <br/>
+    Do you need to update your email address?
+    <input type="radio" name="email" value="yes">Yes
+    <input type="radio" name="email" value="no">No<br>
+     <br/> <br/>
+
+    Do you need to update your address to alter your search area?
+    <input type="radio" name="address" value="yes">Yes
+    <input type="radio" name="address" value="no">No<br>
+    
+     <br/> <br/>
+
+    Do you need to update your pace?
+
+    <input type="radio" name="pace" value="yes">Yes
+    <input type="radio" name="pace" value="no">No<br>
+
+    <br/><br/>
+    Do you need to update your running preference?
+    <input type="radio" name="pace" value="yes">Yes
+    <input type="radio" name="pace" value="no">No<br>
+    <br/><br/>
+    <input type="submit" value ="Let me make my changes ">
 
 
 
