@@ -14,9 +14,6 @@ app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "ABC"
 
-# Normally, if you use an undefined variable in Jinja2, it fails
-# silently. This is horrible. Fix this so that, instead, it raises an
-# error.
 app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
@@ -167,13 +164,23 @@ def process_search_request():
 
     my_long + dl = easternmost_long
 
-
-
-
-
-
     #search for users/runners who meet criteria in form
     # save query as object list
+
+    user_list = User.query.filter(User.lat > southernmost_lat) & 
+                                            (User.lat < northernmost_lat) &
+                                            (User.lng > westernmost_long) & 
+                                            (User.lng < easternmost_long) &
+                                            (User.pace == pace).all()
+
+
+
+
+
+
+
+
+    
 
     #user_list = User.query.filter(User.lat.....)
 
