@@ -1,5 +1,6 @@
 """RunBuddy Routes"""
 import geocoder
+from math import cos 
 
 from jinja2 import StrictUndefined
 
@@ -92,7 +93,7 @@ def verify_user_login():
     password = request.form.get('password')
 
     #save user object using email as unique identifier
-    user = User.query.filter_by(email = user_email).first()
+    user = User.query.filter(User.email == user_email).first()
     
     # if a user tries to login but is not registered, redirect to registration
     if user == None:
@@ -146,7 +147,7 @@ def process_search_request():
     pace = request.form.get('pace')
 
     #calculate square grid for search using userid saved in session for lat/long center point
-    center_user = session['user_id']
+    center_user = User.query.get(session['user_id'])
 
     my_lat = center_user.lat
 
@@ -154,35 +155,24 @@ def process_search_request():
 
     df = (radius/69)
 
-    dl = (df)/(cos(my_lat))
+    dl = ((df)/(cos(my_lat)))
 
-    my_lat - df = southernmost_lat
+    southernmost_lat = (my_lat - df) 
 
-    my_lat + df = northernmost_lat
+    northernmost_lat = (my_lat + df) 
 
-    my_long - dl = westernmost_long
+    westernmost_long = (my_long - dl)
 
-    my_long + dl = easternmost_long
+    easternmost_long =  (my_long + dl) 
 
     #search for users/runners who meet criteria in form
     # save query as object list
 
-    user_list = User.query.filter(User.lat > southernmost_lat) & 
+    user_list = User.query.filter((User.lat > southernmost_lat) & 
                                             (User.lat < northernmost_lat) &
                                             (User.lng > westernmost_long) & 
                                             (User.lng < easternmost_long) &
-                                            (User.pace == pace).all()
-
-
-
-
-
-
-
-
-    
-
-    #user_list = User.query.filter(User.lat.....)
+                                            (User.pace == pace)).all()
 
     
     
