@@ -2,7 +2,7 @@ import datetime
 import geocoder
 import random
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column, DateTime
+from sqlalchemy import Column, DateTime, update
 from sqlalchemy.sql import func
 from faker import Faker
 #myGenerator = Faker()

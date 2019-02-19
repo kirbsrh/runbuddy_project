@@ -7,22 +7,24 @@
 
 <body>
 
-<div id = current_details>
+<div id = current-details>
 Name: {{ user.name }}<br>
 Email address: {{user.email}}<br>
 Address: {{user_address}}<br>
 Pace: {{ user.pace }} <br>
 Run type preference: {{user.run_type}} <br>
 <br>
-
 <button id="toggleEditButton" type="button">
       Edit
     </button><br><br><br>
 </div>
 
-    <div id = "edit-fields"
 
-    <form action="/change_details" method="post">
+
+
+    <div id = "edit-fields">
+
+    <form action="/send_details" method="post">
 
       
         <label>Name:</label>
@@ -70,15 +72,22 @@ Run type preference: {{user.run_type}} <br>
     <option value = "both">both</option>
     </select>
     <br/><br/>
-    <input type="submit" value ="Submit Edits ">
+    <input type="submit" value ="Submit Edits">
 
 </form>
 
 </div>
 
 
- <script src="/static/js/change-user-info.js" type="text/javascript"></script>  
+<!-- <script src="/static/js/change-user-info.js" type="text/javascript"></script>   -->
  <script>
+
+$('#edit-fields').hide();
+
+function toggleEdits(e) {
+   $('#edit-fields').show();
+   $('#current-details').hide(); 
+}
 
  $('#toggleEditButton').on('click', toggleEdits);
 

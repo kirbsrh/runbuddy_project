@@ -297,48 +297,90 @@ def change_user_details():
     """display the profile of the user saved in the session and allow them
     to view and make changes."""
 
-    #check to see if user is logged in
+    #for the "get" portion of the route:
+    
+    #check to see make sure user is logged in
     if 'user_id' in session:
 
         user = User.query.get(session['user_id'])
 
+        #get user latitude and longitude
         user_lat = user.lat
-        print(user_lat)
+        
         user_lng = user.lng
-        print(user.lng)
+        
 
-        #use lat lng details to get address info
+        #use lat lng details to get address info for user
         user_address_info = geocoder.osm([user_lat, user_lng], method = 'reverse')
-        print(user_address_info)
-
+    
+        #get housenumber
         housenumber = user_address_info.housenumber
-        print(housenumber)
+        #get street
         street = user_address_info.street
-        print(street)
+        #get city
         city = user_address_info.city
-        print(city)
+        #get state
         state = user_address_info.state
-        print(state)
+        #get zipcode
         zipcode = user_address_info.postal
-        print(zipcode)
+        
 
         #use string concatenation to recreate and display user address
         user_address = housenumber + " " + street + ", " + city + ", " + state + " " + zipcode
 
-        
+    
         return render_template("/change_details.html", user = user,
             user_address = user_address)
     else:
 
-           #if user not logged in, redirect to login
+       #if user not logged in, redirect to login
         flash("You must be logged in to view your profile details.  Please login.")
         return redirect("/user_login")
 
-# @app.route("/change_details" methods = ["POST"])
-# def allow_for_user_edits():
-#     """take responses from form and allow user to edit existing information and
-#     save new changes to the DB"""
+@app.route("/send_details", methods = ["POST"])
+def allow_for_user_edits():
+    """take responses from form and allow user to edit existing information and
+    save new changes to the DB"""
 
+    
+    if 'user_id' in session:
+        #user should still be the user in the session
+        user = User.query.get(session['user_id'])
+
+        #get details from edits form
+        user_name = request.form.get('name')
+        user_email = request.form.get('email')
+        address = request.form.get('address')
+        pace = request.form.get('pace')
+        run_type = request.form.get('run_type')
+
+        #take user address and convert to lat long to store in DB for search purposes
+        g = geocoder.osm(address)
+        lat_long_pair = g.latlng 
+        lat = lat_long_pair[0]
+        lng = lat_long_pair[1]
+
+        #update user in database with new information
+
+        user.name = user_name
+        user.email = user_email
+        user.lat = lat
+        user.lng = lng
+        user.pace = pace
+        user.run_type = run_type
+            
+           
+
+        #add and save user changes to DB
+        
+        db.session.commit()
+        flash("Your profile has been updated!!")
+        return render_template("/change_success.html", user = user, address = address)
+
+    else:
+        #if user not logged in, redirect to login
+        flash("You must be logged in to view your profile details.  Please login.")
+        return redirect("/user_login")
 
 
 
