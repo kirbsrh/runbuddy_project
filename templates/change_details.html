@@ -5,8 +5,9 @@
 
 <h1>My RunBuddy Details</h1>
 
+<body>
 
-
+<div id = current_details>
 Name: {{ user.name }}<br>
 Email address: {{user.email}}<br>
 Address: {{user_address}}<br>
@@ -17,6 +18,9 @@ Run type preference: {{user.run_type}} <br>
 <button id="toggleEditButton" type="button">
       Edit
     </button><br><br><br>
+</div>
+
+    <div id = "edit-fields"
 
     <form action="/change_details" method="post">
 
@@ -70,10 +74,17 @@ Run type preference: {{user.run_type}} <br>
 
 </form>
 
+</div>
 
-      
+
+ <script src="change-user-info.js"></script>  
+ <script>
+
+ $('#toggleEditButton').on('click', toggleEdits);
+
+ </script>   
  
- 
+ </body>
 
 
 
