@@ -303,16 +303,24 @@ def change_user_details():
         user = User.query.get(session['user_id'])
 
         user_lat = user.lat
+        print(user_lat)
         user_lng = user.lng
+        print(user.lng)
 
         #use lat lng details to get address info
         user_address_info = geocoder.osm([user_lat, user_lng], method = 'reverse')
+        print(user_address_info)
 
         housenumber = user_address_info.housenumber
+        print(housenumber)
         street = user_address_info.street
+        print(street)
         city = user_address_info.city
+        print(city)
         state = user_address_info.state
+        print(state)
         zipcode = user_address_info.postal
+        print(zipcode)
 
         #use string concatenation to recreate and display user address
         user_address = housenumber + " " + street + ", " + city + ", " + state + " " + zipcode
