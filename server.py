@@ -323,8 +323,14 @@ def change_user_details():
     else:
 
            #if user not logged in, redirect to login
-        flash("You must be logged in to view your messages.  Please login.")
+        flash("You must be logged in to view your profile details.  Please login.")
         return redirect("/user_login")
+
+# @app.route("/change_details" methods = ["POST"])
+# def allow_for_user_edits():
+#     """take responses from form and allow user to edit existing information and
+#     save new changes to the DB"""
+
 
 
 
