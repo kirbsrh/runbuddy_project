@@ -272,7 +272,7 @@ def show_messages():
     
 
         #check to see if message list is empty or none, redirect to search
-        if message_list == None:
+        if message_list == []:
             flash("You do not have any messages at this time. Find someone to message!")
             return redirect("/profile")
 
