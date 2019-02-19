@@ -3,6 +3,6 @@
 
 
 function toggleEdits(e) {
-    $('#toggleEditButton').toggle();
     $('#edit-fields').toggle();
+    $('#toggleEditButton').toggle();
 }
