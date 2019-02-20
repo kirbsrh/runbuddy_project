@@ -410,11 +410,15 @@ def take_logout_form_action():
         return redirect("/profile") 
 
 
-@app.route("test_map")
+@app.route("/test_map")
 def test_map_functionality():
     """Route purely for testing OSM mapping with Open Layers"""
 
-    return render_template("test_map.html")  
+    #points
+
+    user_list = User.query.all()
+
+    return render_template("test_map.html", user_list = user_list)  
 
 
 

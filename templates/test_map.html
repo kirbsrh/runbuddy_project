@@ -16,10 +16,22 @@
     const zoom=16;
 
 
+
+
     const markers = new OpenLayers.Layer.Markers( "Markers" );
     map.addLayer(markers);
     
     markers.addMarker(new OpenLayers.Marker(lonLat));
+
+
+    {% for user in user_list %}
+    markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat({{user.lng}} ,{{user.lat}})
+      .transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+        )));
+
+    {% endfor %}
     
     map.setCenter (lonLat, zoom);
 
