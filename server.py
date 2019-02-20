@@ -1,6 +1,6 @@
 """RunBuddy Routes"""
 import geocoder
-from math import cos 
+from math import cos, pi
 
 from jinja2 import StrictUndefined
 
@@ -155,7 +155,7 @@ def process_search_request():
 
     df = (radius/69)
 
-    dl = ((df)/(cos(my_lat)))
+    dl = ((df)/(cos((my_lat)*(pi/180))))
 
     southernmost_lat = (my_lat - df) 
 
@@ -407,7 +407,14 @@ def take_logout_form_action():
     elif request.form['submit_button'] == "Cancel":
 
         #send them back to their profile page
-        return redirect("/profile")   
+        return redirect("/profile") 
+
+
+@app.route("/test_map")
+def test_map_functionality():
+    """Route purely for testing OSM mapping with Open Layers"""
+
+    return render_template("test_map.html")  
 
 
 
