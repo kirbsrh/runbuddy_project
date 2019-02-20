@@ -1,25 +1,72 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 
-<form action="/user_info">
+
 
 <h1>Runner Information</h1>
 
-{% for user in user_list %}
 
 
-  <li>
+
+ <div id="displayRunners">
+
+ {% for user in user_list %}
+ <form action="/user_info">
+
+   <li>
         <a href="/user_info/{{ user.user_id }}">{{ user.name }}</a><br>
         Name: {{ user.name }}<br>
         Pace: {{ user.pace }} <br><br>
 
-</li>
+     </li>
+
+ {% endfor %}
+
+ </form>
+ </div>
+
+<br><br><br>
+
+ <div id="mapdiv" style="height:250px"></div>
+
+
+<script>
+
+    map = new OpenLayers.Map("mapdiv");
+    map.addLayer(new OpenLayers.Layer.OSM());
+
+    const lonLat = new OpenLayers.LonLat( {{my_long}} , {{my_lat}} )
+        .transform(
+            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+            map.getProjectionObject() // to Spherical Mercator Projection
+          );
+      
+    const zoom=16;
+
+
+
+
+    const markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
+    
+    markers.addMarker(new OpenLayers.Marker(lonLat));
+
+    {% for user in user_list %}
+
+    markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat({{user.lng}} ,{{user.lat}})
+      .transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+        )));
 
 {% endfor %}
 
-</form>
+map.setCenter (lonLat, zoom);
 
+
+</script>
 
 
 

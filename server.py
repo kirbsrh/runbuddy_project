@@ -185,7 +185,7 @@ def process_search_request():
     else:
         
         return render_template("display_runner_info.html",
-         user_list = user_list)
+         user_list = user_list, my_lat = my_lat, my_long = my_long)
 
 
 @app.route("/user_info/<user_id>")
