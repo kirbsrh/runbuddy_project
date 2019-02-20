@@ -410,7 +410,7 @@ def take_logout_form_action():
         return redirect("/profile") 
 
 
-@app.route("/test_map")
+@app.route("test_map")
 def test_map_functionality():
     """Route purely for testing OSM mapping with Open Layers"""
 
