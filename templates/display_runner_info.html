@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<!-- <script src="http://www.openlayers.org/api/OpenLayers.js"></script> -->
+
 
 
 
@@ -29,41 +30,92 @@
 
 <br><br><br>
 
- <div id="mapdiv" style="height:250px"></div>
-
+<div id="mapdiv" style="height:250px"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> 
 
 <script>
 
     map = new OpenLayers.Map("mapdiv");
     map.addLayer(new OpenLayers.Layer.OSM());
 
-    const lonLat = new OpenLayers.LonLat( {{my_long}} , {{my_lat}} )
-        .transform(
-            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-            map.getProjectionObject() // to Spherical Mercator Projection
-          );
+    epsg4326 =  new OpenLayers.Projection("EPSG:4326"); //WGS 1984 projection
+    projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
+   
+    var lonLat = new OpenLayers.LonLat( {{my_long}} , {{my_lat}} ).transform(epsg4326, projectTo);
+
+    // const lonLat = new OpenLayers.LonLat( {{my_long}} , {{my_lat}} )
+    //     .transform(
+    //         new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+    //         map.getProjectionObject() // to Spherical Mercator Projection
+    //       );
       
-    const zoom=16;
+    var zoom=14;
+    map.setCenter (lonLat, zoom);
 
-
-
-
-    const markers = new OpenLayers.Layer.Markers( "Markers" );
-    map.addLayer(markers);
+    var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
     
-    markers.addMarker(new OpenLayers.Marker(lonLat));
+    // Define markers as "features" of the vector layer:
+    var feature = new OpenLayers.Feature.Vector(
+            new OpenLayers.Geometry.Point( {{my_long}} ,{{my_lat}}).transform(epsg4326, projectTo),
+            {description:'This is where cool people live'} ,
+            {externalGraphic: 'static/images/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+        );    
+    vectorLayer.addFeatures(feature);
 
-    {% for user in user_list %}
+    
 
-    markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat({{user.lng}} ,{{user.lat}})
-      .transform(
-        new OpenLayers.Projection("EPSG:4326"),
-        map.getProjectionObject()
-        )));
+    var feature = new OpenLayers.Feature.Vector(
+            new OpenLayers.Geometry.Point( -122.353277, 37.585  ).transform(epsg4326, projectTo),
+            {description:'someone else lives here'} ,
+            {externalGraphic: 'static/images/red-marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+        );    
+    vectorLayer.addFeatures(feature);
 
-{% endfor %}
+    map.addLayer(vectorLayer);
 
-map.setCenter (lonLat, zoom);
+        //Add a selector control to the vectorLayer with popup functions
+    var controls = {
+      selector: new OpenLayers.Control.SelectFeature(vectorLayer, { onSelect: createPopup, onUnselect: destroyPopup })
+
+    };
+
+    function createPopup(feature) {
+      feature.popup = new OpenLayers.Popup.FramedCloud("pop",
+          feature.geometry.getBounds().getCenterLonLat(),
+          null,
+          '<div class="markerContent">'+feature.attributes.description+'</div>',
+          null,
+          true,
+          function() { controls['selector'].unselectAll(); }
+      );
+      //feature.popup.closeOnMove = true;
+      map.addPopup(feature.popup);
+    }
+
+    function destroyPopup(feature) {
+      feature.popup.destroy();
+      feature.popup = null;
+    }
+    
+    map.addControl(controls['selector']);
+    controls['selector'].activate();
+
+    // const markers = new OpenLayers.Layer.Markers( "Markers" );
+    // map.addLayer(markers);
+    
+    // markers.addMarker(new OpenLayers.Marker(lonLat));
+
+//     {% for user in user_list %}
+
+//     markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat({{user.lng}} ,{{user.lat}})
+//       .transform(
+//         new OpenLayers.Projection("EPSG:4326"),
+//         map.getProjectionObject()
+//         )));
+
+// {% endfor %}
+
+
 
 
 </script>

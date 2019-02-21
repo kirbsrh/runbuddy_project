@@ -29,16 +29,16 @@
     // Define markers as "features" of the vector layer:
     var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point( -122.343277549317 ,37.5866221038009 ).transform(epsg4326, projectTo),
-            {description:'This is the value of<br>the description attribute'} ,
+            {description:'This is where cool people live'} ,
             {externalGraphic: 'static/images/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
         );    
     vectorLayer.addFeatures(feature);
 
     
     var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( -0.1244324, 51.5006728  ).transform(epsg4326, projectTo),
-            {description:'Big Ben'} ,
-            {externalGraphic: 'img/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
+            new OpenLayers.Geometry.Point( -122.353277, 37.585  ).transform(epsg4326, projectTo),
+            {description:'someone else lives here'} ,
+            {externalGraphic: 'static/images/red-marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
         );    
     vectorLayer.addFeatures(feature);
 
