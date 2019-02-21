@@ -1,6 +1,7 @@
 <html><body>
   <div id="mapdiv"></div>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+
   <script>
 
 
@@ -19,9 +20,21 @@
 
 
     const markers = new OpenLayers.Layer.Markers( "Markers" );
+
+    // const popups = new OpenLayers.Layer.Popups("Popups")
     map.addLayer(markers);
+  
     
     markers.addMarker(new OpenLayers.Marker(lonLat));
+
+    //           // A popup with some information about our location
+    // var popup = new OpenLayers.Popup("Popup",
+    //             new OpenLayers.LonLat(lonLat),
+    //             new OpenLayers.Size(200,200),
+    //             "example popup",
+    //             true);
+
+    // map.addPopup(popup);
 
 
     {% for user in user_list %}
@@ -31,31 +44,13 @@
         map.getProjectionObject()
         )));
 
+
+
     {% endfor %}
     
     map.setCenter (lonLat, zoom);
 
-  //   const overlay = new OpenLayers.Layer.Vector('Overlay', {
-  //     styleMap: new OpenLayers.styleMap({
-  //       externalGraphic: '/static/images/marker.png',
-  //       graphicWidth: 20, graphicHeight: 24, graphicYOffset: -24,
-  //       title: '${tooltip}'
-  //     })
-  //   });
 
-  //   overlay.addFeatures([
-  //     new OpenLayers.Feature.Vector(lonLat, {tooltip: 'OpenLayers'})
-  //     ]);
 
-  //       // A popup with some information about our location
-  //   const popup = new OpenLayers.Popup.FramedCloud("Popup", 
-  //       lonLat.getBounds().getCenterLonLat(), null,
-  //       '<a target="_blank" href="http://openlayers.org/">We</a> ' +
-  //       'could be here.<br>Or elsewhere.', null,
-  //       true // <-- true if we want a close (X) button, false otherwise
-  //   );
-
-  //   map.addPopup(popup);
-  // };
   </script>
 </body></html>
