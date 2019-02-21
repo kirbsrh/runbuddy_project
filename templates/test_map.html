@@ -1,8 +1,80 @@
-<html><body>
-  <div id="mapdiv"></div>
+<html>
+
+<head>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+</head>
+
+<body>
+  <div id="mapdiv"></div>
+<!--   <div id="popup" class="ol-popup">
+
+  <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+
+  <div id="popup-content"></div>
+
+  </div> -->
+
+
+
+
 
   <script>
+
+      // import Map from 'ol/Map.js';
+
+      // import Overlay from 'ol/Overlay.js';
+
+      // import View from 'ol/View.js';
+
+      // import {toStringHDMS} from 'ol/coordinate.js';
+
+      // import TileLayer from 'ol/layer/Tile.js';
+
+      // import {toLonLat} from 'ol/proj.js';
+
+      // import TileJSON from 'ol/source/TileJSON.js';
+
+      // Elements that make up the popup
+
+      // let container = document.getElementById('popup');
+
+      // let content = document.getElementById('popup-content');
+
+      // let closer = document.getElementById('popup-closer');
+
+
+      // creating an overlay to anchor the popup to the map
+      // let overlay = new Overlay({
+
+      //   element: container,
+
+      //   autoPan: true,
+
+      //   autoPanAnimation: {
+
+      //     duration: 250
+
+      //   }
+
+      // });
+
+      // // * Add a click handler to hide the popup.
+
+      // // * @return {boolean} Don't follow the href.
+
+      // // */
+
+      // closer.onclick = function() {
+
+      //   overlay.setPosition(undefined);
+
+      //   closer.blur();
+
+      //   return false;
+
+      // };
+
+
 
 
     map = new OpenLayers.Map("mapdiv");
@@ -27,6 +99,32 @@
     
     markers.addMarker(new OpenLayers.Marker(lonLat));
 
+
+    const popupClass = OpenLayers.Class(OpenLayers.Popup.FramedCloud, {
+
+    "autoSize": true,
+
+    "minSize": new OpenLayers.Size(300, 50),
+
+    "maxSize": new OpenLayers.Size(500, 300),
+
+    "keepInMap": true
+    });
+
+    const feature = new OpenLayers.Feature(markers, longLat);
+
+    feature.closeBox = true;
+
+    feature.popupClass = popupClass;
+
+    feature.data.popupContentHTML = "hello";
+
+
+
+    feature.data.overflow = "auto";
+
+    let marker = new OpenLayers.Marker(longLat, marker.clone());
+
     //           // A popup with some information about our location
     // var popup = new OpenLayers.Popup("Popup",
     //             new OpenLayers.LonLat(lonLat),
@@ -47,6 +145,23 @@
 
 
     {% endfor %}
+
+      //   // click handler to render popup on the map
+      //   map.on('singleclick', function(evt) {
+
+      //   let coordinate = evt.coordinate;
+
+      //   let hdms = toStringHDMS(toLonLat(coordinate));
+
+
+
+      //   content.innerHTML = '<p>You clicked here:</p><code>' + hdms +
+
+      //       '</code>';
+
+      //   overlay.setPosition(coordinate);
+
+      // });
     
     map.setCenter (lonLat, zoom);
 
