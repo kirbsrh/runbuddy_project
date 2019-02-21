@@ -410,27 +410,27 @@ def take_logout_form_action():
         return redirect("/profile") 
 
 
-@app.route("/test_map")
-def test_map_functionality():
-    """Route purely for testing OSM mapping with Open Layers"""
+# @app.route("/test_map")
+# def test_map_functionality():
+#     """Route purely for testing OSM mapping with Open Layers"""
 
-    #points
+#     #points
 
-    user_list = User.query.all()
+#     user_list = User.query.all()
 
-    return render_template("test_map.html", user_list = user_list) 
+#     return render_template("test_map.html", user_list = user_list) 
 
-@app.route("/test_map_2")
-def test_map_with_popups():
-    """Route purely for testing OSM maps with popup functionality"""
+# @app.route("/test_map_2")
+# def test_map_with_popups():
+#     """Route purely for testing OSM maps with popup functionality"""
 
-    return render_template("test_map_2.html") 
+#     return render_template("test_map_2.html") 
 
-@app.route("/test_map_3")
-def test_map_with_functioning_popups():
-    """Route purely for testing OSM maps with popup functionality"""
+# @app.route("/test_map_3")
+# def test_map_with_functioning_popups():
+#     """Route purely for testing OSM maps with popup functionality"""
 
-    return render_template("test_map_3.html")
+#     return render_template("test_map_3.html")
 
 
 

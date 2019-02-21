@@ -8,9 +8,9 @@
 
 <h1>Runner Information</h1>
 
-
-
-
+<br>
+<b>These are the runners who fit your search criteria:</b>
+<br><br><br>
  <div id="displayRunners">
 
  {% for user in user_list %}
@@ -27,10 +27,12 @@
 
  </form>
  </div>
+ <br>
+ <b>Click on a marker to view which runner it represents!</b>
+<br>
+<br>
 
-<br><br><br>
-
-<div id="mapdiv" style="height:250px"></div>
+<div id="mapdiv" style="height:500px"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> 
 
 <script>
@@ -66,7 +68,7 @@
 
     var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point( {{user.lng}}, {{user.lat}}).transform(epsg4326, projectTo),
-            {description:'{{user.name}}'} ,
+            {description:'<a href="/user_info/{{ user.user_id }}">{{ user.name }}</a>'} ,
             {externalGraphic: 'static/images/red-marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
         );    
     vectorLayer.addFeatures(feature);
