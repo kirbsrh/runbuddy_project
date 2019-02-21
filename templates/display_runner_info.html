@@ -57,21 +57,23 @@
     // Define markers as "features" of the vector layer:
     var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point( {{my_long}} ,{{my_lat}}).transform(epsg4326, projectTo),
-            {description:'This is where cool people live'} ,
+            {description:'This is your address!'} ,
             {externalGraphic: 'static/images/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
         );    
     vectorLayer.addFeatures(feature);
 
-    
+    {% for user in user_list %}
 
     var feature = new OpenLayers.Feature.Vector(
-            new OpenLayers.Geometry.Point( -122.353277, 37.585  ).transform(epsg4326, projectTo),
-            {description:'someone else lives here'} ,
+            new OpenLayers.Geometry.Point( {{user.lng}}, {{user.lat}}).transform(epsg4326, projectTo),
+            {description:'{{user.name}}'} ,
             {externalGraphic: 'static/images/red-marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
         );    
     vectorLayer.addFeatures(feature);
 
     map.addLayer(vectorLayer);
+
+    {% endfor %}
 
         //Add a selector control to the vectorLayer with popup functions
     var controls = {
