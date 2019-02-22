@@ -149,6 +149,8 @@ def process_search_request():
     #calculate square grid for search using userid saved in session for lat/long center point
     center_user = User.query.get(session['user_id'])
 
+    center_user_name = center_user.name
+
     my_lat = center_user.lat
 
     my_long =center_user.lng 
@@ -185,7 +187,8 @@ def process_search_request():
     else:
         
         return render_template("display_runner_info.html",
-         user_list = user_list, my_lat = my_lat, my_long = my_long)
+         user_list = user_list, my_lat = my_lat, my_long = my_long,
+          center_user_name = center_user_name)
 
 
 @app.route("/user_info/<user_id>")
@@ -408,6 +411,25 @@ def take_logout_form_action():
 
         #send them back to their profile page
         return redirect("/profile") 
+
+
+@app.route("/about_us")
+def show_about_us_page():
+    """route the user to the about us page"""
+
+    return render_template("/about_us.html")
+
+@app.route("/careers")
+def show_career_page():
+    """route to the career page"""
+
+    return render_template("/careers.html")
+
+@app.route("/mission")
+def show_mission_and_vision():
+    """display to page showing vision and mission"""
+
+    return render_template("/mission.html")
 
 
 # @app.route("/test_map")

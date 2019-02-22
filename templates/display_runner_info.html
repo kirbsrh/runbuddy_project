@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<!-- <script src="http://www.openlayers.org/api/OpenLayers.js"></script> -->
-
-
-
-
 <h1>Runner Information</h1>
 
 <br>
@@ -45,11 +40,7 @@
    
     var lonLat = new OpenLayers.LonLat( {{my_long}} , {{my_lat}} ).transform(epsg4326, projectTo);
 
-    // const lonLat = new OpenLayers.LonLat( {{my_long}} , {{my_lat}} )
-    //     .transform(
-    //         new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-    //         map.getProjectionObject() // to Spherical Mercator Projection
-    //       );
+
       
     var zoom=14;
     map.setCenter (lonLat, zoom);
@@ -59,7 +50,7 @@
     // Define markers as "features" of the vector layer:
     var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point( {{my_long}} ,{{my_lat}}).transform(epsg4326, projectTo),
-            {description:'This is your address!'} ,
+            {description:'This is your address, {{center_user_name}}!'} ,
             {externalGraphic: 'static/images/marker.png', graphicHeight: 25, graphicWidth: 21, graphicXOffset:-12, graphicYOffset:-25  }
         );    
     vectorLayer.addFeatures(feature);
@@ -103,23 +94,6 @@
     
     map.addControl(controls['selector']);
     controls['selector'].activate();
-
-    // const markers = new OpenLayers.Layer.Markers( "Markers" );
-    // map.addLayer(markers);
-    
-    // markers.addMarker(new OpenLayers.Marker(lonLat));
-
-//     {% for user in user_list %}
-
-//     markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat({{user.lng}} ,{{user.lat}})
-//       .transform(
-//         new OpenLayers.Projection("EPSG:4326"),
-//         map.getProjectionObject()
-//         )));
-
-// {% endfor %}
-
-
 
 
 </script>
