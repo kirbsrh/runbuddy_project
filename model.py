@@ -125,6 +125,10 @@ class Message(db.Model):
     time_updated = Column(DateTime(timezone=True),
             onupdate=func.now(),
             )
+    original_msg_id = db.Column(db.Boolean,
+            default = True,
+            nullable = False,
+            )
     sender = db.relationship('User',
             foreign_keys = 'Message.sender_id',
             backref = ('sender_messages') 

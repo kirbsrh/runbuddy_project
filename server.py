@@ -4,7 +4,7 @@ from math import cos, pi
 
 from jinja2 import StrictUndefined
 
-from flask import (Flask, render_template, redirect, request, flash, session)
+from flask import (Flask, render_template, redirect, request, flash, session, jsonify)
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Message, connect_to_db, db
@@ -186,7 +186,7 @@ def process_search_request():
     # pass list of results to display in display runner info template
     else:
         
-        return render_template("display_runner_info.html",
+        return render_template("/display_runner_info.html",
          user_list = user_list, my_lat = my_lat, my_long = my_long,
           center_user_name = center_user_name)
 
