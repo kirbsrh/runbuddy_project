@@ -117,6 +117,13 @@ def verify_user_login():
         flash("Error, please try logging in again.")
         return redirect('/user_login')
 
+
+@app.route("/runner_compatibility")
+def display_runner_compatibility_form():
+    """display the form for runner compatibility"""
+
+    return render_template("/runner_compatibility.html")
+
 @app.route("/profile")
 def show_runner_profile():
     """display the profile of the user saved in the session."""
