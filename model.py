@@ -126,8 +126,7 @@ class Message(db.Model):
             onupdate=func.now(),
             )
     original_msg_id = db.Column(db.Boolean,
-            default = True,
-            nullable = False,
+            nullable = True,
             )
     sender = db.relationship('User',
             foreign_keys = 'Message.sender_id',
@@ -141,7 +140,7 @@ class Message(db.Model):
         """Show info about the message."""
 
         return "<msg_id={} sender_id={} receiver_id={}>".format(
-        self.msg_id, self.sender_id, self.receiver_id)
+        self.msg_id, self.sender_id, self.receiver_id, self.original_msg_id)
 
 
 #################################################################################
