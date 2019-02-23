@@ -124,6 +124,64 @@ def display_runner_compatibility_form():
 
     return render_template("/runner_compatibility.html")
 
+@app.route("/runner_compatibility", methods = ["POST"])
+def store_runner_compatibility_data():
+    """add runner compatibility to database"""
+
+
+
+    activity_quest = request.form.get('activity_level')
+    talking_quest = request.form.get('talking')
+    weather_quest = request.form.get('weather')
+    distance_quest = request.form.get('distance')
+    track_quest = request.form.get('track')
+    dogs_quest = request.form.get('dogs')
+    kids_quest = request.form.get('kids')
+    music_quest = request.form.get('music')
+    current_race_quest = request.form.get('current_race')
+    why_quest = request.form.get('why')
+
+
+    # compatibility_list = [int(activity_quest), int(talking_quest), int(weather_quest),
+    # int(distance_quest), int(track_quest), int(dogs_quest), int(kids_quest),
+    # int(music_quest), int(current_race_quest), int(why_quest)]
+    # print(compatibility_list)
+
+    #get user info from session
+    user = User.query.get(session['user_id'])
+
+    # user.compatibility = compatibility_list
+
+    if user.user_id in Compatibility:
+        flash("You have already completed our compatibility form.  Start your search!")
+        return redirect("search.html")
+
+    #user info is not found, instantiate user and add to DB
+    else:
+
+        new_user_compatibility = Compatibility(
+            activity_quest = int(activity_quest),
+            talking_quest = int(talking_quest),
+            weather_quest = int(weather_quest),
+            distance_quest = int(distance_quest),
+            track_quest = int(track_quest),
+            dogs_quest = int(dogs_quest),
+            kids_quest = int(kids_quest),
+            music_quest = int(music_quest),
+            current_race_quest = int(current_race_quest),
+            why_quest = int(why_quest)
+            )
+
+        # db.session.add(new_user_compatibility)
+        # db.session.commit()
+
+
+
+    flash("Your answers have been saved!")
+    return redirect('/search')
+
+
+
 @app.route("/profile")
 def show_runner_profile():
     """display the profile of the user saved in the session."""

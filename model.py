@@ -142,6 +142,44 @@ class Message(db.Model):
         return "<msg_id={} sender_id={} receiver_id={}>".format(
         self.msg_id, self.sender_id, self.receiver_id, self.original_msg_id)
 
+class Compatibility(db.Model):
+
+    """compatibility model."""
+
+    __tablename__ = "compatibilities"
+
+
+    user_id = db.Column(db.Integer,
+            db.ForeignKey('users.user_id'),
+            primary_key=True,
+            )
+    activity_quest = db.Column(db.Integer,
+            )
+    talking_quest = db.Column(db.Integer,
+            )
+    weather_quest = db.Column(db.Integer,
+            )
+    distance_quest = db.Column(db.Integer,
+            )
+    track_quest = db.Column(db.Integer,
+            )
+    dogs_quest = db.Column(db.Integer,
+            )
+    kids_quest = db.Column(db.Integer,
+            )
+    music_quest = db.Column(db.Integer,
+            )
+    current_race_quest = db.Column(db.Integer,
+            )
+    why_quest = db.Column(db.Integer,
+            )
+
+
+    def __repr__(self):
+        """Show info about the user."""
+
+        return "<user_id={}".format(self.user_id)
+
 
 #################################################################################
 # Helper functions
