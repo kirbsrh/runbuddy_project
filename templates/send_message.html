@@ -28,10 +28,10 @@
 
     <script>
 
-        function showMessage(results) {
-        console.log(results);
+        function showMessage(data) {
+        console.log(data);
         const sentMessage = document.querySelector('#sent-message-span');
-        sentMessage.innerHTML = results;
+        sentMessage.innerHTML = data;
         // $("#sent-message-span").innerHTML(results);   
         }
 
@@ -43,8 +43,8 @@
                 type:"POST",
                 url:"/send_message",
                 data: {message:messageText, receiver_id:{{user_id}}},
-                success: console.log(results),
-                dataType:"json"
+                success: showMessage,
+                // dataType:"json"
             });
         }
 
