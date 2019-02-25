@@ -3,17 +3,38 @@
 
   <h2>Send a message to {{name}}!</h2>
 
-  <form action="/send_message", method = "POST" >
+  <form>
 
     <input type="hidden" name="receiver_id" value="{{user_id}}">
     
     Enter your message below:<br><br>
-    <textarea name="message" rows="10" cols="30">
+    <textarea id = "message-area" name="message" rows="10" cols="30">
 
     </textarea>
     <br><br>
  
-    <input type="submit" value ="Send Message! ">   
+    <input id = "submit-button" type="submit" value ="Send Message! "> 
+
+    <div id = "sent-message-div"></div>
+
+
+    <script>
+
+        function showSentMessage() {
+            const messageText = $('#message-area').value();
+            $.ajax({
+                type:"POST",
+                url:"/send_message.json",
+                data: {message:messageText, receiver_id:{{user_id}}},
+                dataType:"json"
+            });
+        }
+
+
+
+        $('#submit-button').on('click', showSentMessage);
+
+    </script>
 
 
 

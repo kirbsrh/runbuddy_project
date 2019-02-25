@@ -283,21 +283,59 @@ def show_message_form(user_id):
 
     return render_template("/send_message.html", name = name, user_id = user_id)
 
-@app.route("/send_message", methods = ["GET","POST"])
-def send_message():
-    """Send message from sender to receiver and store message in DB"""
+# @app.route("/send_message", methods = ["GET","POST"])
+# def send_message():
+#     """Send message from sender to receiver and store message in DB"""
 
-    #data stored in the session is that of the user who is logged in
+#     #data stored in the session is that of the user who is logged in
+#     #the user who is logged in is the sender
+#     sender_id = session['user_id']
+#     #print(sender_id)
+
+#     #set the receiver id from the hidden form equal to the variable receiver_id
+#     receiver_id = request.form.get('receiver_id')
+#     #print(receiver_id)
+
+#     #get message from form and save it as message variable
+#     message = request.form.get('message')
+
+#     #check to make sure there is a message before adding to DB
+#     if message == None:
+#         flash("Error!  Your message appears to be blank.  Please try again.")
+#         return redirect("/send_message")
+
+    # else:
+
+    #     #create message object
+    #     new_message = Message(
+    #         sender_id = sender_id,
+    #         receiver_id = receiver_id,
+    #         message = message,
+    #        )
+
+    #     #Add and Save to DB
+    #     db.session.add(new_message)
+    #     db.session.commit()
+
+    #     #make sure the user knows that their message was sent
+    #     flash("Message successfully sent!")
+
+    #     # redirect to search page to see if user wants to do anything else
+    #     return redirect("/search")
+
+
+@app.route("/send_message.json", methods = ["POST"])
+def send_message_using_json():
+    """using AJAX to send message and display to user"""
+
+       #data stored in the session is that of the user who is logged in
     #the user who is logged in is the sender
     sender_id = session['user_id']
     #print(sender_id)
 
-    #set the receiver id from the hidden form equal to the variable receiver_id
-    receiver_id = request.form.get('receiver_id')
-    #print(receiver_id)
-
-    #get message from form and save it as message variable
-    message = request.form.get('message')
+    content = request.json 
+    print(content)
+    print("CONTENT IS ABOVE!!!")
 
     #check to make sure there is a message before adding to DB
     if message == None:
@@ -321,7 +359,19 @@ def send_message():
         flash("Message successfully sent!")
 
         # redirect to search page to see if user wants to do anything else
-        return redirect("/search")
+        return redirect("/search") 
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/messages')
 def show_messages():
