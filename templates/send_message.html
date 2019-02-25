@@ -3,7 +3,7 @@
 
   <h2>Send a message to {{name}}!</h2>
 
-  <form>
+  <form id = "message-form" action="/send_message", method = "POST">
 
     <input type="hidden" name="receiver_id" value="{{user_id}}">
     
@@ -13,26 +13,49 @@
     </textarea>
     <br><br>
  
-    <input id = "submit-button" type="submit" value ="Send Message! "> 
+    <input type="submit" value ="Send Message! "> 
 
-    <div id = "sent-message-div"></div>
+    </form>
+
+    <br><br><br>
+    <div id = "showMessageDiv">
+    <span id = "sent-message-span"></span>   
+
+
+    </div>
+    
 
 
     <script>
 
-        function showSentMessage() {
-            const messageText = $('#message-area').value();
+        function showMessage(results) {
+        console.log(results);
+        const sentMessage = document.querySelector('#sent-message-span');
+        sentMessage.innerHTML = results;
+        // $("#sent-message-span").innerHTML(results);   
+        }
+
+        function sendMessage(evt) {
+            evt.preventDefault();
+            const messageText = $('#message-area').val();
+            ;
             $.ajax({
                 type:"POST",
-                url:"/send_message.json",
+                url:"/send_message",
                 data: {message:messageText, receiver_id:{{user_id}}},
+                success: console.log(results),
                 dataType:"json"
             });
         }
 
 
+        const messageForm = document.querySelector('#message-form');
+        // function showSentMessage(evt) {
+        // 
+        // }
+        messageForm.addEventListener('submit', sendMessage);
+        
 
-        $('#submit-button').on('click', showSentMessage);
 
     </script>
 
@@ -40,6 +63,6 @@
 
 
 
-</form>
+
 {% endblock %}
     

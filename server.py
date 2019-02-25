@@ -271,15 +271,15 @@ def show_specific_user_profile(user_id):
     return render_template("/user_info.html", name = name,
         pace = pace, run_type = run_type, user_id = user_id)
 
-@app.route("/send_message/<user_id>")
+@app.route("/send_message/<user_id>", methods = ["GET"])
 def show_message_form(user_id):
     """Display the form to send a message to a user"""
 
     user = User.query.get(user_id)
-    print(user)
 
     name = user.name
     user_id = user.user_id
+    print(user)
 
     return render_template("/send_message.html", name = name, user_id = user_id)
 
@@ -324,7 +324,7 @@ def show_message_form(user_id):
     #     return redirect("/search")
 
 
-@app.route("/send_message.json", methods = ["POST"])
+@app.route("/send_message", methods = ["POST"])
 def send_message_using_json():
     """using AJAX to send message and display to user"""
 
@@ -333,12 +333,11 @@ def send_message_using_json():
     sender_id = session['user_id']
     #print(sender_id)
 
-    content = request.json 
-    print(content)
-    print("CONTENT IS ABOVE!!!")
+    user_message = request.form.get('message')
+    receiver_id = request.form.get('receiver_id')
 
     #check to make sure there is a message before adding to DB
-    if message == None:
+    if user_message == None:
         flash("Error!  Your message appears to be blank.  Please try again.")
         return redirect("/send_message")
 
@@ -348,7 +347,7 @@ def send_message_using_json():
         new_message = Message(
             sender_id = sender_id,
             receiver_id = receiver_id,
-            message = message,
+            message = user_message,
            )
 
         #Add and Save to DB
@@ -359,14 +358,8 @@ def send_message_using_json():
         flash("Message successfully sent!")
 
         # redirect to search page to see if user wants to do anything else
-        return redirect("/search") 
-
-
-
-
-
-
-
+        print(new_message.message)
+        return(new_message.message) 
 
 
 
