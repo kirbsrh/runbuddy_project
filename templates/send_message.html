@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h2>Send a message to {{name}}!</h2>
+  <h2 id = "second-header">Send a message to {{name}}!</h2>
 
   <form id = "message-form" action="/send_message", method = "POST">
 
@@ -19,7 +19,11 @@
 
     <br><br><br>
     <div id = "showMessageDiv">
-    <span id = "sent-message-span"></span>   
+    Hooray! The message you sent is below.  Don't forget to view your messages later
+     to see if you have a response.<br><br>
+    <textarea disabled id = "sent-message-span" name="message-was-sent" rows="10" cols="30">
+        
+    </textarea>   
 
 
     </div>
@@ -28,10 +32,15 @@
 
     <script>
 
+        $('#showMessageDiv').hide();
+
         function showMessage(data) {
         console.log(data);
         const sentMessage = document.querySelector('#sent-message-span');
         sentMessage.innerHTML = data;
+        $('#showMessageDiv').show();
+        $('#second-header').hide();
+        $('#message-form').hide();
         // $("#sent-message-span").innerHTML(results);   
         }
 
