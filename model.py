@@ -154,24 +154,38 @@ class Compatibility(db.Model):
             primary_key=True,
             )
     activity_quest = db.Column(db.Integer,
+            nullable = True,
             )
     talking_quest = db.Column(db.Integer,
+            nullable = True,
             )
     weather_quest = db.Column(db.Integer,
+            nullable = True,
             )
     distance_quest = db.Column(db.Integer,
+            nullable = True,
             )
     track_quest = db.Column(db.Integer,
+            nullable = True,
             )
     dogs_quest = db.Column(db.Integer,
+            nullable = True,
             )
     kids_quest = db.Column(db.Integer,
+            nullable = True,
             )
     music_quest = db.Column(db.Integer,
+            nullable = True,
             )
     current_race_quest = db.Column(db.Integer,
+            nullable = True,
             )
     why_quest = db.Column(db.Integer,
+            nullable = True,
+            )
+    user = db.relationship('User',
+            foreign_keys = 'Compatibility.user_id',
+            backref = ('user_compatibilities') 
             )
 
 

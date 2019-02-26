@@ -160,6 +160,7 @@ def store_runner_compatibility_data():
     else:
 
         new_user_compatibility = Compatibility(
+            user_id = int(user.user_id),
             activity_quest = int(activity_quest),
             talking_quest = int(talking_quest),
             weather_quest = int(weather_quest),
@@ -172,8 +173,8 @@ def store_runner_compatibility_data():
             why_quest = int(why_quest)
             )
 
-        # db.session.add(new_user_compatibility)
-        # db.session.commit()
+        db.session.add(new_user_compatibility)
+        db.session.commit()
 
 
 
