@@ -1,5 +1,6 @@
 """RunBuddy Routes"""
 import geocoder
+#import correlation
 from math import cos, pi
 
 from jinja2 import StrictUndefined
@@ -7,7 +8,7 @@ from jinja2 import StrictUndefined
 from flask import (Flask, render_template, redirect, request, flash, session, jsonify)
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import User, Message, connect_to_db, db
+from model import User, Message, Compatibility, connect_to_db, db
 
 
 app = Flask(__name__)
@@ -151,8 +152,9 @@ def store_runner_compatibility_data():
     user = User.query.get(session['user_id'])
 
     # user.compatibility = compatibility_list
+    compatibility_list = Compatibility.query.all()
 
-    if user.user_id in Compatibility:
+    if user.user_id in compatibility_list:
         flash("You have already completed our compatibility form.  Start your search!")
         return redirect("search.html")
 
@@ -240,7 +242,10 @@ def process_search_request():
                                             (User.lat < northernmost_lat) &
                                             (User.lng > westernmost_long) & 
                                             (User.lng < easternmost_long) &
-                                            (User.pace == pace)).all()
+                                            (User.pace == pace)&
+                                            (User.user_id != center_user.user_id)).all()
+
+    #calculate compatibility of matching users
 
     
     
@@ -249,12 +254,14 @@ def process_search_request():
         flash("No runners found who meet your criteria, please alter your search.")
         return redirect('/search')
 
+
     # pass list of results to display in display runner info template
     else:
-        
         return render_template("/display_runner_info.html",
-         user_list = user_list, my_lat = my_lat, my_long = my_long,
-          center_user= center_user)
+        user_list = user_list, my_lat = my_lat, my_long = my_long,
+        center_user= center_user)
+
+
 
 
 @app.route("/user_info/<user_id>")
