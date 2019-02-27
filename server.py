@@ -1,7 +1,7 @@
 """RunBuddy Routes"""
 import geocoder
 #import correlation
-from math import cos, pi
+from math import cos, pi, sqrt
 
 from jinja2 import StrictUndefined
 
@@ -9,6 +9,7 @@ from flask import (Flask, render_template, redirect, request, flash, session, js
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Message, Compatibility, connect_to_db, db
+from similarity import euclid
 
 
 app = Flask(__name__)
@@ -247,6 +248,8 @@ def process_search_request():
 
     #calculate compatibility of matching users
 
+
+
     
     
     # if the query has no results let the user know
@@ -260,6 +263,86 @@ def process_search_request():
         return render_template("/display_runner_info.html",
         user_list = user_list, my_lat = my_lat, my_long = my_long,
         center_user= center_user)
+
+def calculate_compatibility(user_list, center_user)
+    """calculate the compatibility of the users in the search results compared
+     with the searching user"""
+
+    #query the database for the responses of the center user
+    
+    
+    center_user_responses = Compatibility.query.get(center_user.user_id)
+
+    if center_user_responses == None:
+        pass
+    else:
+
+    center_activity = center_user_responses.activity_quest
+    center_talking = center_user_responses.talking_quest
+    center_weather = center_user_responses.weather_quest
+    center_distance = center_user_responses.distance_quest
+    center_track = center_user_responses.track_quest
+    center_dogs = center_user_responses.dogs_quest
+    center_kids = center_user_responses.kids_quest
+    center_music = center_user_responses.music_quest
+    center_current_race = center_user_responses.current_race_quest
+    center_why = center_user_responses.why_quest
+
+    center_response_list = []
+
+    center_response_list.append(center_activity)
+    center_response_list.append(center_talking)
+    center_response_list.append(center_weather)
+    center_response_list.append(center_distance)
+    center_response_list.append(center_track)
+    center_response_list.append(center_dogs)
+    center_response_list.append(center_kids)
+    center_response_list.append(center_music)
+    center_response_list.append(center_current_race)
+    center_response_list.append(center_why)
+
+
+
+    for user in user_list:
+        user_responses = Compatibility.query.get(user.user_id)
+
+        if user_responses == None:
+            compatibility_rating = "Not found"
+
+        else:
+            user_response_list = []
+
+            user_activity = user_responses.activity_quest
+            user_response_list.append(user_activity)
+
+            user_talking = user_responses.talking_quest
+            user_response_list.append(user_talking)
+
+            user_weather = user_responses.weather_quest
+            user_response_list.append(user_weather)
+
+            user_distance = user_responses.distance_quest
+            user_response_list.append(user_distance)
+
+            user_track = user_responses.track_quest
+            user_response_list.append(user_track)
+
+            user_dogs = user_responses.dogs_quest
+            user_response_list.append(user_dogs)
+
+            user_kids = user_responses.kids_quest
+            user_response_list.append(user_kids)
+
+            user_music = user_responses.music_quest
+            user_response_list.append(user_music)
+
+            user_current_race = user_responses.current_race_quest
+            user_response_list.append(user_current_race)
+
+            user_why =user_responses.why_quest
+            user_response_list.append(user_why)
+
+
 
 
 
