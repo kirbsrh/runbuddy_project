@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>My Messages with {{specific_user.name}}</h1>
+
+{% for message in message_list %}
+
+
+  <form action="/messages_with_", >
+
+     <li>
+        Sent from: {{message.sender}}<br>
+        Sent time: {{ message.time_created }}<br>
+        Message: {{ message.message }} <br><br>
+
+        
+
+        <br/><br/>
+      
+
+</li>
+
+{% endfor %}
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
