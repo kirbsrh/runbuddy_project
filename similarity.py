@@ -19,4 +19,4 @@ def square_rooted(x):
  
 def cosine_similarity(x, y):
     similarity = numpy.dot(x, y) /(numpy.sqrt(numpy.dot(x, x)) * numpy.sqrt(numpy.dot(y, y)))
-    return numpy.around(similarity,3) 
+    return similarity 

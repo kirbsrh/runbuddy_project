@@ -194,6 +194,36 @@ class Compatibility(db.Model):
 
         return "<user_id={}".format(self.user_id)
 
+    @classmethod
+    def seed_class(cls, users):
+        """function to seed the database with fake compatibility info"""
+
+        #list of ratings to randomly assign to form answers for users
+
+        ratings_list =  [1, 2, 3]
+
+        for user in users:
+
+            compatibility = cls(
+            user_id = user.user_id,
+            activity_quest = random.choice(ratings_list),
+            talking_quest = random.choice(ratings_list),
+            weather_quest =random.choice(ratings_list),
+            distance_quest = random.choice(ratings_list),
+            track_quest = random.choice(ratings_list),
+            dogs_quest =random.choice(ratings_list),
+            kids_quest = random.choice(ratings_list),
+            music_quest = random.choice(ratings_list),
+            current_race_quest = random.choice(ratings_list),
+            why_quest = random.choice(ratings_list),
+            )
+            compatibility.save()
+
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit() 
+
 
 #################################################################################
 # Helper functions

@@ -334,7 +334,11 @@ def process_search_request():
 
                     compatibility_rating = cosine_similarity(center_response_list, user_response_list)
 
-                    user.compatibility_rating = str((1-compatibility_rating)*100)+"%"
+                    user.compatibility_rating = round((1-compatibility_rating)*100,2)
+
+                    user.compatibility_rating = str(user.compatibility_rating) + "%"
+
+
 
                     
 
