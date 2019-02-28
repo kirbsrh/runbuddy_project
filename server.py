@@ -9,7 +9,7 @@ from flask import (Flask, render_template, redirect, request, flash, session, js
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Message, Compatibility, connect_to_db, db
-from similarity import euclid, square_rooted, cosine_similarity
+from similarity import euclid, square_rooted, cosine_similarity, corrcoef
 
 
 
@@ -335,6 +335,10 @@ def process_search_request():
                     compatibility_rating = cosine_similarity(center_response_list, user_response_list)
 
                     user.compatibility_rating = round((1-compatibility_rating)*100,2)
+
+                    #compatibility_rating = corrcoef(center_response_list, user_response_list)
+
+                    #user.compatibility_rating = round(user.compatibility_rating*100,2)
 
                     user.compatibility_rating = str(user.compatibility_rating) + "%"
 

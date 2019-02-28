@@ -20,3 +20,8 @@ def square_rooted(x):
 def cosine_similarity(x, y):
     similarity = numpy.dot(x, y) /(numpy.sqrt(numpy.dot(x, x)) * numpy.sqrt(numpy.dot(y, y)))
     return similarity 
+
+
+def corrcoef(x,y):
+    numps_similarity = numpy.corrcoef(x,y)
+    return numps_similarity
