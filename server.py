@@ -330,17 +330,17 @@ def process_search_request():
                     user_why =user_responses.why_quest
                     user_response_list.append(user_why)
 
-                    #compatibility_rating = euclid(zip(center_response_list, user_response_list))
+                    compatibility_rating = euclid(zip(center_response_list, user_response_list))
 
-                    compatibility_rating = cosine_similarity(center_response_list, user_response_list)
+                    #compatibility_rating = cosine_similarity(center_response_list, user_response_list)
 
-                    user.compatibility_rating = round((1-compatibility_rating)*100,2)
+                    #user.compatibility_rating = round((1-compatibility_rating)*100,2)
 
                     #compatibility_rating = corrcoef(center_response_list, user_response_list)
 
                     #user.compatibility_rating = round(user.compatibility_rating*100,2)
 
-                    user.compatibility_rating = str(user.compatibility_rating) + "%"
+                    user.compatibility_rating = str(compatibility_rating) + "%"
 
 
 

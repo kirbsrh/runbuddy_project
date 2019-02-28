@@ -4,7 +4,10 @@ import numpy
 
 def euclid(pairs):
     distance = sqrt(sum([pow(x - y, 2) for x, y in pairs]))
-    return 1 / (1 + distance)
+    max_distance = 6.324555320336759
+    similarity = 1-(distance/max_distance)
+    #return 1 / (1 + distance)
+    return round(similarity*100, 2)
 
  
 def square_rooted(x):
