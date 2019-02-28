@@ -9,7 +9,8 @@ from flask import (Flask, render_template, redirect, request, flash, session, js
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Message, Compatibility, connect_to_db, db
-from similarity import euclid
+from similarity import euclid, square_rooted, cosine_similarity
+
 
 
 app = Flask(__name__)
@@ -329,9 +330,11 @@ def process_search_request():
                     user_why =user_responses.why_quest
                     user_response_list.append(user_why)
 
-                    compatibility_rating = euclid(zip(center_response_list, user_response_list))
+                    #compatibility_rating = euclid(zip(center_response_list, user_response_list))
 
-                    user.compatibility_rating = str(compatibility_rating)
+                    compatibility_rating = cosine_similarity(center_response_list, user_response_list)
+
+                    user.compatibility_rating = str((1-compatibility_rating)*100)+"%"
 
                     
 
@@ -340,7 +343,7 @@ def process_search_request():
 
         return render_template("/display_runner_info.html",
         user_list = user_list, my_lat = my_lat, my_long = my_long,
-        center_user= center_user, compatibility_rating = compatibility_rating)
+        center_user= center_user)
 
 # def calculate_compatibility(user_list, center_user):
     """calculate the compatibility of the users in the search results compared
