@@ -470,7 +470,7 @@ def show_messages_with_specific_runner(user_id):
 
         specific_user = User.query.get(user_id)
 
-        users = User.query.all()
+       
 
         #query data base to get messages between logged in user and specific user
         #check sender and receiver for both
@@ -500,7 +500,7 @@ def show_messages_with_specific_runner(user_id):
                 sender_info = User.query.get(sender_id)
                 print (sender_info)
                 sender_name = sender_info.name
-                message.sender = str(sender_name) 
+                message.sender_name = str(sender_name) 
                 
 
 
