@@ -1,9 +1,11 @@
 <html>
-  <head><title>OpenLayers Marker Popups</title></head>
-  <body>
+<head><title>OpenLayers Marker Popups</title></head>
+<body>
   <div id="mapdiv"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> 
-  <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js">
+      
+    </script> 
+    <script>
     map = new OpenLayers.Map("mapdiv");
     map.addLayer(new OpenLayers.Layer.OSM());
     
@@ -66,19 +68,19 @@
           null,
           true,
           function() { controls['selector'].unselectAll(); }
-      );
-      //feature.popup.closeOnMove = true;
-      map.addPopup(feature.popup);
-    }
+        );
+        //feature.popup.closeOnMove = true;
+        map.addPopup(feature.popup);
+      }
 
-    function destroyPopup(feature) {
-      feature.popup.destroy();
-      feature.popup = null;
-    }
-    
-    map.addControl(controls['selector']);
-    controls['selector'].activate();
+      function destroyPopup(feature) {
+        feature.popup.destroy();
+        feature.popup = null;
+      }
       
-  </script>
+      map.addControl(controls['selector']);
+      controls['selector'].activate();
+      
+    </script>
   
 </body></html>

@@ -7,92 +7,92 @@
 
 <body>
 
-<div id = current-details>
-Name: {{ user.name }}<br>
-Email address: {{user.email}}<br>
-Address: {{user_address}}<br>
-Pace: {{ user.pace }} <br>
-Run type preference: {{user.run_type}} <br>
-<br>
-<button id="toggleEditButton" type="button">
-      Edit
-    </button><br><br><br>
-</div>
+    <div id = current-details>
+    Name: {{ user.name }}<br>
+    Email address: {{user.email}}<br>
+    Address: {{user_address}}<br>
+    Pace: {{ user.pace }} <br>
+    Run type preference: {{user.run_type}} <br>
+    <br>
+    <button id="toggleEditButton" type="button">
+          Edit
+        </button><br><br><br>
+    </div>
 
 
 
 
     <div id = "edit-fields">
 
-    <form action="/send_details" method="post">
+        <form action="/send_details" method="post">
 
-      
-        <label>Name:</label>
-        <input type="text" name="name" value="{{ user.name if user.name != None else "" }}" /> <br><br>
-      
-        <label>Email Address:</label>
-        <input type="text" name="email" value="{{ user.email if user.email != None else "" }}"/><br><br>
+          
+            <label>Name:</label>
+            <input type="text" name="name" value="{{ user.name if user.name != None else "" }}" /> <br><br>
+          
+            <label>Email Address:</label>
+            <input type="text" name="email" value="{{ user.email if user.email != None else "" }}"/><br><br>
 
-        <label>Address:</label>
-        <textarea rows="4" columns = "50" name="address">{{ user_address if user_address != None else "" }}</textarea>/><br><br>
+            <label>Address:</label>
+            <textarea rows="4" columns = "50" name="address">{{ user_address if user_address != None else "" }}</textarea>/><br><br>
 
-    Please select the pace closest to your average mile pace in minutes below:
-    <select name = "pace">
-    <option value = "6:00">6:00</option>
-    <option value = "6:15">6:15</option>
-    <option value = "6:30">6:30</option>
-    <option value = "6:45">6:45</option>
-    <option value = "7:00">7.00</option>
-    <option value = "7:15">7:15</option>
-    <option value = "7:30">7:30</option>
-    <option value = "7:45">7:45</option>
-    <option value = "8:00">8:00</option>
-    <option value = "8:15">8:15</option>
-    <option value = "8:30">8:30</option>
-    <option value = "8:45">8:45</option>
-    <option value = "9:00">9:00</option>
-    <option value = "9:15">9:15</option>
-    <option value = "9:30">9:30</option>
-    <option value = "9:45">9:45</option>
-    <option value = "10:00">10:00</option>
-    <option value = "10:15">10:15</option>
-    <option value = "10:30">10:30</option>
-    <option value = "10:45">10:45</option>
-    <option value = "11:00">11:00</option>
-    <option value = "11:15">11:15</option>
-    <option value = "11:30">11:30</option>
-    <option value = "11:45">11:45</option>
-    <option value = "12:00">12:00</option>
-    </select>
-    <br/><br/>
-    Please select your running preference:
-    <select name ="run_type">
-    <option value = "road">road</option>
-    <option value = "trail">trail</option>
-    <option value = "both">both</option>
-    </select>
-    <br/><br/>
-    <input type="submit" value ="Submit Edits">
+            Please select the pace closest to your average mile pace in minutes below:
+            <select name = "pace">
+            <option value = "6:00">6:00</option>
+            <option value = "6:15">6:15</option>
+            <option value = "6:30">6:30</option>
+            <option value = "6:45">6:45</option>
+            <option value = "7:00">7.00</option>
+            <option value = "7:15">7:15</option>
+            <option value = "7:30">7:30</option>
+            <option value = "7:45">7:45</option>
+            <option value = "8:00">8:00</option>
+            <option value = "8:15">8:15</option>
+            <option value = "8:30">8:30</option>
+            <option value = "8:45">8:45</option>
+            <option value = "9:00">9:00</option>
+            <option value = "9:15">9:15</option>
+            <option value = "9:30">9:30</option>
+            <option value = "9:45">9:45</option>
+            <option value = "10:00">10:00</option>
+            <option value = "10:15">10:15</option>
+            <option value = "10:30">10:30</option>
+            <option value = "10:45">10:45</option>
+            <option value = "11:00">11:00</option>
+            <option value = "11:15">11:15</option>
+            <option value = "11:30">11:30</option>
+            <option value = "11:45">11:45</option>
+            <option value = "12:00">12:00</option>
+            </select>
+            <br/><br/>
+            Please select your running preference:
+            <select name ="run_type">
+            <option value = "road">road</option>
+            <option value = "trail">trail</option>
+            <option value = "both">both</option>
+            </select>
+            <br/><br/>
+            <input type="submit" value ="Submit Edits">
 
-</form>
+        </form>
 
-</div>
+    </div>
 
 
- <script>
+    <script>
 
-$('#edit-fields').hide();
+        $('#edit-fields').hide();
 
-function toggleEdits(e) {
-   $('#edit-fields').show();
-   $('#current-details').hide(); 
-}
+        function toggleEdits(e) {
+           $('#edit-fields').show();
+           $('#current-details').hide(); 
+        }
 
- $('#toggleEditButton').on('click', toggleEdits);
+         $('#toggleEditButton').on('click', toggleEdits);
 
- </script>   
+    </script>   
  
- </body>
+</body>
 
 
 

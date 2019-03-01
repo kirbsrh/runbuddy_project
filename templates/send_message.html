@@ -1,72 +1,70 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h2 id = "second-header">Send a message to {{name}}!</h2>
+<h2 id = "second-header">Send a message to {{name}}!</h2>
 
-  <form id = "message-form" action="/send_message", method = "POST">
+<form id = "message-form" action="/send_message", method = "POST">
 
     <input type="hidden" name="receiver_id" value="{{user_id}}">
     
-    Enter your message below:<br><br>
-    <textarea id = "message-area" name="message" rows="10" cols="30">
+        Enter your message below:<br><br>
+            <textarea id = "message-area" name="message" rows="10" cols="30">
 
-    </textarea>
-    <br><br>
+            </textarea>
+            <br><br>
  
     <input type="submit" value ="Send Message! "> 
 
-    </form>
+</form>
 
-    <br><br><br>
-    <div id = "showMessageDiv">
+<br><br><br>
+<div id = "showMessageDiv">
     Hooray! The message you sent is below.  Don't forget to view your messages later
      to see if you have a response.<br><br>
-    <textarea disabled id = "sent-message-span" name="message-was-sent" rows="10" cols="30">
+        <textarea disabled id = "sent-message-span" name="message-was-sent" rows="10" cols="30">
         
-    </textarea>   
+        </textarea>   
 
 
-    </div>
+</div>
     
 
 
-    <script>
+<script>
 
-        $('#showMessageDiv').hide();
+    $('#showMessageDiv').hide();
 
-        function showMessage(data) {
-        console.log(data);
-        const sentMessage = document.querySelector('#sent-message-span');
-        sentMessage.innerHTML = data;
-        $('#showMessageDiv').show();
-        $('#second-header').hide();
-        $('#message-form').hide();
-        // $("#sent-message-span").innerHTML(results);   
-        }
+    function showMessage(data) {
+    console.log(data);
+    const sentMessage = document.querySelector('#sent-message-span');
+    sentMessage.innerHTML = data;
+    $('#showMessageDiv').show();
+    $('#second-header').hide();
+    $('#message-form').hide();
+    // $("#sent-message-span").innerHTML(results);   
+    }
 
-        function sendMessage(evt) {
-            evt.preventDefault();
-            const messageText = $('#message-area').val();
-            ;
-            $.ajax({
-                type:"POST",
-                url:"/send_message",
-                data: {message:messageText, receiver_id:{{user_id}}},
-                success: showMessage,
-                // dataType:"json"
-            });
-        }
-
-
-        const messageForm = document.querySelector('#message-form');
-        // function showSentMessage(evt) {
-        // 
-        // }
-        messageForm.addEventListener('submit', sendMessage);
-        
+    function sendMessage(evt) {
+        evt.preventDefault();
+        const messageText = $('#message-area').val();
+        ;
+        $.ajax({
+            type:"POST",
+            url:"/send_message",
+            data: {message:messageText, receiver_id:{{user_id}}},
+            success: showMessage,
+            // dataType:"json"
+        });
+    }
 
 
-    </script>
+    const messageForm = document.querySelector('#message-form');
+    // function showSentMessage(evt) {
+    // 
+    // }
+    messageForm.addEventListener('submit', sendMessage);
+
+</script>
 
 
 

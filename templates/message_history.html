@@ -6,23 +6,22 @@
 {% for message in message_list %}
 
 
-  <form action="/messages_with_", >
+    <form action="/messages_with_", >
 
-     <li>
-        Sent from: {{message.sender_name}}<br>
-        Sent time: {{ message.time_created }}<br>
-        Message: {{ message.message }} <br><br>
+        <li>
+            Sent from: {{message.sender_name}}<br>
+            Sent time: {{ message.time_created }}<br>
+            Message: {{ message.message }} <br><br>
 
         
 
-        <br/><br/>
+            <br/><br/>
       
 
-</li>
-
+        </li>
 {% endfor %}
 
-</form>
+    </form>
 
 
 
