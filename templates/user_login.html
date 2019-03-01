@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
+  <head>
+    <style>
+    <link href="signin.css" rel="stylesheet">
+  </style>
   <h2>Login</h2>
-
-  <form action="/user_login", method = "POST">
-    <h1>   Please log in </h1>
-    Email address:
-    <input type="text" name="email">
-     <br/> <br/>
-     Password:
-    <input type="password" name="password"> <br/> <br/>
-    <input type="submit" value ="Please Submit ">
+  <body class="text-center">
+    <script {box-sizing: border-box;}></script>
+  <form class ="form-signin" action="/user_login", method = "POST">
+    <h1></h1>
+    <div class="container">
+    <label for="email" class="sr-only">Email address</label>
+    <input type="text" id='email' name="email" class="form-control" placeholder="Email address" required autofocus>
+     <br/> 
+    <label for="password" class="sr-only">Password</label>
+    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required> <br/>
+    <input type="submit" value ="Sign in ">
+  </div>
 
     {% for message in get_flashed_messages() %}
     <li>{{ message }}</li>
@@ -18,4 +25,5 @@
 
 
   </form>
+</body>
   {% endblock %}
