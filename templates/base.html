@@ -13,24 +13,24 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-light bg-light">
-  <span class="navbar-brand mb-0 h1">RunBuddy</span>
+  <nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">RunBuddy</span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"></span>
   </button> 
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class ="nav-link" href="http://127.0.0.1:5000/change_details">My Profile<span class="sr-only">(current)</span></a>
-        </li> 
-        <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:5000/messages">My Messages</a>
+        <a class ="nav-link" href="/change_details">My Profile<span class="sr-only">(current)</span></a>
+      </li> 
+      <li class="nav-item">
+        <a class="nav-link" href="/messages">My Messages</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:5000/search">Search</a>
+        <a class="nav-link" href="/search">Search</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="http://127.0.0.1:5000/logout">Log Out</a>
+        <a class="nav-link" href="/logout">Log Out</a>
       </li>
 
       <li class="nav-item dropdown">
@@ -43,7 +43,7 @@
           <a class="dropdown-item" href="http://127.0.0.1:5000/mission">Mission & Vision</a>
         </div>
       </li>
- </ul>
+    </ul>
   </div>
 
 </nav>
@@ -56,7 +56,7 @@
   {% for message in get_flashed_messages() %}
     <li>{{ message }}</li>
   {% endfor %}
-</ul>
+  </ul>
 
 
 
