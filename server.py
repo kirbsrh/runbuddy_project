@@ -144,12 +144,6 @@ def store_runner_compatibility_data():
     current_race_quest = request.form.get('current_race')
     why_quest = request.form.get('why')
 
-
-    # compatibility_list = [int(activity_quest), int(talking_quest), int(weather_quest),
-    # int(distance_quest), int(track_quest), int(dogs_quest), int(kids_quest),
-    # int(music_quest), int(current_race_quest), int(why_quest)]
-    # print(compatibility_list)
-
     #get user info from session
     user = User.query.get(session['user_id'])
 
@@ -205,9 +199,15 @@ def display_search_page():
     return render_template("search.html")
 
 
-@app.route("/search", methods = ["POST"])
+@app.route("/search", methods = ["GET","POST"])
 def process_search_request():
     """Process search form data."""
+
+    #setting constant for results per page to be displayed
+    RESULTS_PER_PAGE = 10
+
+    #set page
+    page = request.args.get('page', 1, type=int)
 
     #set radius to distance selected in form
     distance = request.form.get('distance')
@@ -245,7 +245,8 @@ def process_search_request():
                                             (User.lng > westernmost_long) & 
                                             (User.lng < easternmost_long) &
                                             (User.pace == pace)&
-                                            (User.user_id != center_user.user_id)).all()
+                                            (User.user_id != center_user.user_id)).paginate(
+                                            page, 10, False)
     
     # if the query has no results let the user know
     if user_list == None:
@@ -342,11 +343,25 @@ def process_search_request():
 
                     user.compatibility_rating = str(compatibility_rating) + "%"
 
+                    next_url = url_for('/display_runner_info', page=user_list.next_num) \
+                        if user_list.has_next else None
+                    prev_url = url_for('/display_runner_info', page=user_list.prev_num) \
+                        if user_list.has_prev else None
+
+                    
+
+
+                    
+
 
 
         return render_template("/display_runner_info.html",
-        user_list = user_list, my_lat = my_lat, my_long = my_long,
-        center_user= center_user)
+        user_list = user_list.items, next_url=next_url, prev_url=prev_url,
+         my_lat = my_lat, my_long = my_long, center_user= center_user)
+
+@app.route("/next")
+def show_next_ten_results():
+    pass
 
 
 
