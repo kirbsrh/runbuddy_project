@@ -5,7 +5,7 @@ from math import cos, pi, sqrt
 
 from jinja2 import StrictUndefined
 
-from flask import (Flask, render_template, redirect, request, flash, session, jsonify)
+from flask import (Flask, render_template, redirect, request, flash, session, jsonify, url_for)
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Message, Compatibility, connect_to_db, db
@@ -292,7 +292,7 @@ def process_search_request():
 
             # list_of_ratings = []
 
-            for user in user_list:
+            for user in user_list.items:
                 user_responses = Compatibility.query.get(user.user_id)
 
                 if user_responses == None:
