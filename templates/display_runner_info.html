@@ -23,14 +23,12 @@
 
     {% endfor %}
 
-    {% for user in user_list %}
-      {% include '_user.html' %}
-    {% endfor %}
+
     {% if prev_url %}
-    <a href="{{ prev_url }}">More results</a>
+    <a href="{{prev_url}}">Previous results</a>
     {% endif %}
     {% if next_url %}
-    <a href="{{ next_url }}">Previous results</a>
+    <a href="{{next_url}}">More results</a>
     {% endif %}
 
     </form>

@@ -199,7 +199,7 @@ def display_search_page():
     return render_template("search.html")
 
 
-@app.route("/search", methods = ["GET","POST"])
+@app.route("/display_search", methods = ["GET","POST"])
 def process_search_request():
     """Process search form data."""
 
@@ -252,20 +252,16 @@ def process_search_request():
     if user_list == None:
         flash("No runners found who meet your criteria, please alter your search.")
         return redirect('/search')
-
-
     # pass list of results to display in display runner info template
     else:
-
-
     #calculate compatibility scores for users in list
-
         center_user_responses = Compatibility.query.get(center_user.user_id)
+
+        center_response_list = []
 
         if center_user_responses == None:
             pass
         else:
-
             center_activity = center_user_responses.activity_quest
             center_talking = center_user_responses.talking_quest
             center_weather = center_user_responses.weather_quest
@@ -277,8 +273,6 @@ def process_search_request():
             center_current_race = center_user_responses.current_race_quest
             center_why = center_user_responses.why_quest
 
-            center_response_list = []
-
             center_response_list.append(center_activity)
             center_response_list.append(center_talking)
             center_response_list.append(center_weather)
@@ -289,8 +283,6 @@ def process_search_request():
             center_response_list.append(center_music)
             center_response_list.append(center_current_race)
             center_response_list.append(center_why)
-
-            # list_of_ratings = []
 
             for user in user_list.items:
                 user_responses = Compatibility.query.get(user.user_id)
@@ -333,28 +325,15 @@ def process_search_request():
 
                     compatibility_rating = euclid(zip(center_response_list, user_response_list))
 
-                    #compatibility_rating = cosine_similarity(center_response_list, user_response_list)
-
-                    #user.compatibility_rating = round((1-compatibility_rating)*100,2)
-
-                    #compatibility_rating = corrcoef(center_response_list, user_response_list)
-
-                    #user.compatibility_rating = round(user.compatibility_rating*100,2)
-
                     user.compatibility_rating = str(compatibility_rating) + "%"
 
-                    next_url = url_for('/display_runner_info', page=user_list.next_num) \
+
+                    next_url = url_for('process_search_request', page=user_list.next_num) \
                         if user_list.has_next else None
-                    prev_url = url_for('/display_runner_info', page=user_list.prev_num) \
+                    prev_url = url_for('process_search_request', page=user_list.prev_num) \
                         if user_list.has_prev else None
 
                     
-
-
-                    
-
-
-
         return render_template("/display_runner_info.html",
         user_list = user_list.items, next_url=next_url, prev_url=prev_url,
          my_lat = my_lat, my_long = my_long, center_user= center_user)
