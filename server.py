@@ -194,7 +194,6 @@ def display_search_page():
 
 @app.route("/search", methods = ["POST"])
 def calculate_compatibility_for_user_list():
-
     """calculate the compatibility for users in the list
     compared with the center user"""
     #call calculate search grid function to get user list
@@ -358,8 +357,7 @@ def send_message_using_json():
 
 @app.route('/messages')
 def show_messages():
-
-    
+    """let a user view their messages"""
     #check to see is user is logged in
     if 'user_id' in session:
 
