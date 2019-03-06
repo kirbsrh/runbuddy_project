@@ -1,70 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Runner Information</h1>
+<h1 class="text-center">Runner Information</h1>
+<container>
 
 <br>
-  <b>These are the runners who fit your search criteria:</b>
-  <br><br><br>
-  <div id="displayRunners" class ="displayRunners-row">
-  
-    <div class="displayRunners-group col-md-6">
-
-    {% for user in user_list %}
-    <form action="/user_info">
-
-      <li>
-        <a href="/user_info/{{user.user_id}}">{{ user.name }}</a><br>
-        Name: {{ user.name }}<br>
-        Pace: {{ user.pace }} <br>
-        
-        Compatibility Rating: {{user.compatibility_rating}} <br>
-        <br>
-
-      </li>
-
-    {% endfor %}
-
-
-    </form>
-  </div>
-  <nav aria-label="Page navigation" id="page-nav">
-    <ul class="pagination">
-      {% for page_item in range(1,total_pages+1) %}
-
-        <li class="page-item">
-          <a class="page-link" href="/show_results?distance={{distance}}&pace={{pace}}&page={{page_item}}&submit=Find+my+buddy%21">{{page_item}}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  </nav>
-  <script type="text/javascript">
-    var pageItems = document.getElementById("page-nav");
-    var allPages = pageItems.getElementByClassName("page-item");
-
-    for (var i = 0; i < allPages.length; i++) {
-      allPages[i].addEventListener("click", function(){
-        var current = document.getElementsByClassName("active";
-        if (current.length>0) {
-          current[0].className = current[0].className.replace("active", "");
-        }
-
-        this.className += "active";
-      });
-    }
-
-  </script>
-
-
-
-  <br>
-<div class="displayRunners-group col-md-6">
-
-  <b>Click on a marker to view which runner it represents!</b>
-  <br>
-  <br>
-
-  <div id="mapdiv" class=z-depth-1-half-mapdiv-6" style="height:400px">
+  <div id="mapdiv" class="col-sm-8 ml-3 text-center float-right" style="height:1000px; width: 1000px;">
+    <b>Click on a marker to view which runner it represents!</b>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> 
   </div>
 
@@ -77,10 +19,7 @@
     projectTo = map.getProjectionObject(); //The map projection (Spherical Mercator)
    
     var lonLat = new OpenLayers.LonLat( {{my_long}} , {{my_lat}} ).transform(epsg4326, projectTo);
-
-
-      
-    var zoom=14;
+    var zoom=12;
     map.setCenter (lonLat, zoom);
 
     var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
@@ -135,8 +74,65 @@
 
 
 </script>
+
+  <div  class="text-center ml-3 col-sm-4">
+
+  <b>These are the runners who fit your search criteria:</b>
+  <br>
+  
+    {% for user in user_list %}
+    <form action="/user_info">
+
+      <li class="b-1">
+        <a href="/user_info/{{user.user_id}}">{{ user.name }}</a><br>
+        Name: {{ user.name }}<br>
+        Pace: {{ user.pace }} <br>
+        
+        Compatibility Rating: {{user.compatibility_rating}} <br>
+        
+      </li>
+
+    {% endfor %}
+
+
+    </form>
+
+  <nav aria-label="Page navigation" id="page-nav">
+    <ul class="pagination">
+      {% for page_item in range(1,total_pages+1) %}
+
+        <li class="page-item">
+          <a class="page-link" href="/show_results?distance={{distance}}&pace={{pace}}&page={{page_item}}&submit=Find+my+buddy%21">{{page_item}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  <script type="text/javascript">
+    var pageItems = document.getElementById("page-nav");
+    var allPages = pageItems.getElementByClassName("page-item");
+
+    for (var i = 0; i < allPages.length; i++) {
+      allPages[i].addEventListener("click", function(){
+        var current = document.getElementsByClassName("active";
+        if (current.length>0) {
+          current[0].className = current[0].className.replace("active", "");
+        }
+
+        this.className += "active";
+      });
+    }
+
+  </script>
+
 </div>
+
+
+
+
+
+
 </div>
+</container>
 
 
 
