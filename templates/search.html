@@ -3,7 +3,7 @@
 
 <h2>Search</h2>
 
-<form action="/search" id = "search-form" method = "POST">
+<form action="/show_results" id = "search-form" method = "GET">
     I want to search for runners within 
     <select name = "distance">
         <option value = "1">1</option>
@@ -46,6 +46,8 @@
         <option value = "12:00">12:00</option>
     </select>minutes/mile pace.
     <br/><br/>
+
+    <input type="hidden" name="page" value="1">
 
     <br/><br/>
     <input type="submit" name = "submit"

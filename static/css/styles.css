@@ -3,3 +3,26 @@
 /*#edit-fields {
     display: none;
 }*/
+
+/* Style the buttons */
+.page-item {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.page-item.active, .page-item:hover {
+  background-color: #666;
+  color: white;
+}
+
+.displayRunners-group{
+overflow:hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+text-align: center;
+}

@@ -6,7 +6,9 @@
 <br>
   <b>These are the runners who fit your search criteria:</b>
   <br><br><br>
-  <div id="displayRunners">
+  <div id="displayRunners" class ="displayRunners-row">
+  
+    <div class="displayRunners-group col-md-6">
 
     {% for user in user_list %}
     <form action="/user_info">
@@ -26,13 +28,45 @@
 
     </form>
   </div>
+  <nav aria-label="Page navigation" id="page-nav">
+    <ul class="pagination">
+      {% for page_item in range(1,total_pages+1) %}
+
+        <li class="page-item">
+          <a class="page-link" href="/show_results?distance={{distance}}&pace={{pace}}&page={{page_item}}&submit=Find+my+buddy%21">{{page_item}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  <script type="text/javascript">
+    var pageItems = document.getElementById("page-nav");
+    var allPages = pageItems.getElementByClassName("page-item");
+
+    for (var i = 0; i < allPages.length; i++) {
+      allPages[i].addEventListener("click", function(){
+        var current = document.getElementsByClassName("active";
+        if (current.length>0) {
+          current[0].className = current[0].className.replace("active", "");
+        }
+
+        this.className += "active";
+      });
+    }
+
+  </script>
+
+
+
   <br>
+<div class="displayRunners-group col-md-6">
+
   <b>Click on a marker to view which runner it represents!</b>
   <br>
   <br>
 
-  <div id="mapdiv" style="height:500px"></div>
+  <div id="mapdiv" class=z-depth-1-half-mapdiv-6" style="height:400px">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> 
+  </div>
 
     <script>
 
@@ -101,6 +135,8 @@
 
 
 </script>
+</div>
+</div>
 
 
 

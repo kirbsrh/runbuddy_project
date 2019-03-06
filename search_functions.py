@@ -11,7 +11,7 @@ def get_radius():
     """Get distance from search form and calc radius."""
 
     #set radius to distance selected in form
-    distance = request.form.get('distance')
+    distance = request.args.get('distance')
     # print(distance)
     radius = int(distance)
     print(radius)
@@ -21,7 +21,7 @@ def get_pace():
     """Get pace from search form"""
 
     #set pace to pace query
-    pace = request.form.get('pace')
+    pace = request.args.get('pace')
     print(pace)
     return pace
 

@@ -192,12 +192,33 @@ def display_search_page():
 
     return render_template("search.html")
 
-@app.route("/search", methods = ["POST"])
+@app.route("/show_results")
 def calculate_compatibility_for_user_list():
     """calculate the compatibility for users in the list
     compared with the center user"""
     #call calculate search grid function to get user list
     user_list = calculate_search_grid()
+
+    results_per_page = 10
+
+    total_search_results=len(user_list)
+    print(total_search_results)
+
+    total_pages = int(round(total_search_results/results_per_page))
+
+    page = int(request.args.get('page'))
+
+    end = (page*results_per_page)
+    beginning = (end)-(results_per_page)
+    
+
+    user_list = user_list[beginning:end]
+
+    distance = str(get_radius())
+    pace = get_pace()
+
+
+
     # print(user_list)
     
     # if the query has no results let the user know
@@ -286,7 +307,8 @@ def calculate_compatibility_for_user_list():
                     user.compatibility_rating = str(compatibility_rating) + "%"
             
             return render_template("/display_runner_info.html", user_list = user_list, my_lat = my_lat, my_long = my_long,
-        center_user= center_user)
+        center_user= center_user, total_search_results=total_search_results, page=page, total_pages=total_pages,
+        distance=distance, pace=pace)
 
 
 @app.route("/user_info/<user_id>")
