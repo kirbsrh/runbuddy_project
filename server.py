@@ -10,7 +10,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import User, Message, Compatibility, connect_to_db, db
 from similarity import euclid, square_rooted, cosine_similarity, corrcoef
-from search_functions import get_radius, get_pace, calculate_search_grid, calculate_compatibility_for_user_list
+from search_functions import get_radius, get_pace, calculate_search_grid
 
 
 
