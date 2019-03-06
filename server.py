@@ -132,8 +132,6 @@ def display_runner_compatibility_form():
 def store_runner_compatibility_data():
     """add runner compatibility to database"""
 
-
-
     activity_quest = request.form.get('activity_level')
     talking_quest = request.form.get('talking')
     weather_quest = request.form.get('weather')
@@ -175,12 +173,8 @@ def store_runner_compatibility_data():
         db.session.add(new_user_compatibility)
         db.session.commit()
 
-
-
     flash("Your answers have been saved!")
     return redirect('/search')
-
-
 
 @app.route("/profile")
 def show_runner_profile():
@@ -190,7 +184,6 @@ def show_runner_profile():
     print(user)
 
     return render_template("/profile.html", user = user)
-
 
 
 @app.route("/search")
@@ -363,10 +356,6 @@ def send_message_using_json():
         return(new_message.message) 
 
 
-
-
-
-
 @app.route('/messages')
 def show_messages():
 
@@ -380,8 +369,6 @@ def show_messages():
         #query data base to see if user_id matches receiver_id in Msg table
         #save query as a list 
         message_list = Message.query.filter(Message.receiver_id == user.user_id).all()
-
-    
 
         #check to see if message list is empty or none, redirect to search
         if message_list == []:
@@ -417,8 +404,6 @@ def show_messages_with_specific_runner(user_id):
 
         specific_user = User.query.get(user_id)
 
-       
-
         #query data base to get messages between logged in user and specific user
         #check sender and receiver for both
         #save query as a list 
@@ -431,8 +416,6 @@ def show_messages_with_specific_runner(user_id):
         #query data base to see if user_id matches receiver_id in Msg table
         #save query as a list 
         #message_list = Message.query.filter(Message.receiver_id == user.user_id).all()
-
-    
 
         #check to see if message list is empty or none, redirect to search
         if message_list == []:
@@ -449,8 +432,6 @@ def show_messages_with_specific_runner(user_id):
                 sender_name = sender_info.name
                 message.sender_name = str(sender_name) 
                 
-
-
             return render_template("message_history.html", message_list = message_list,
                 specific_user = specific_user)
 
@@ -459,7 +440,6 @@ def show_messages_with_specific_runner(user_id):
            #if user not logged in, redirect to login
         flash("You must be logged in to view your messages.  Please login.")
         return redirect("/user_login")
-
 
 
 @app.route("/change_details")
@@ -479,7 +459,6 @@ def change_user_details():
         
         user_lng = user.lng
         
-
         #use lat lng details to get address info for user
         user_address_info = geocoder.osm([user_lat, user_lng], method = 'reverse')
     
@@ -494,11 +473,9 @@ def change_user_details():
         #get zipcode
         zipcode = user_address_info.postal
         
-
         #use string concatenation to recreate and display user address
         user_address = housenumber + " " + street + ", " + city + ", " + state + " " + zipcode
 
-    
         return render_template("/change_details.html", user = user,
             user_address = user_address)
     else:
@@ -512,7 +489,6 @@ def allow_for_user_edits():
     """take responses from form and allow user to edit existing information and
     save new changes to the DB"""
 
-    
     if 'user_id' in session:
         #user should still be the user in the session
         user = User.query.get(session['user_id'])
@@ -538,8 +514,6 @@ def allow_for_user_edits():
         user.lng = lng
         user.pace = pace
         user.run_type = run_type
-            
-           
 
         #add and save user changes to DB
         
@@ -551,9 +525,6 @@ def allow_for_user_edits():
         #if user not logged in, redirect to login
         flash("You must be logged in to view your profile details.  Please login.")
         return redirect("/user_login")
-
-
-
 
 @app.route("/logout")
 def confirm_logout_intention():
@@ -579,7 +550,6 @@ def take_logout_form_action():
         #send them back to their profile page
         return redirect("/profile") 
 
-
 @app.route("/about_us")
 def show_about_us_page():
     """route the user to the about us page"""
@@ -597,31 +567,6 @@ def show_mission_and_vision():
     """display to page showing vision and mission"""
 
     return render_template("/mission.html")
-
-
-# @app.route("/test_map")
-# def test_map_functionality():
-#     """Route purely for testing OSM mapping with Open Layers"""
-
-#     #points
-
-#     user_list = User.query.all()
-
-#     return render_template("test_map.html", user_list = user_list) 
-
-# @app.route("/test_map_2")
-# def test_map_with_popups():
-#     """Route purely for testing OSM maps with popup functionality"""
-
-#     return render_template("test_map_2.html") 
-
-# @app.route("/test_map_3")
-# def test_map_with_functioning_popups():
-#     """Route purely for testing OSM maps with popup functionality"""
-
-#     return render_template("test_map_3.html")
-
-
 
 
 if __name__ == "__main__":
