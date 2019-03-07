@@ -456,7 +456,7 @@ def show_messages_with_specific_runner(user_id):
                 message.sender_name = str(sender_name) 
                 
             return render_template("message_history.html", message_list = message_list,
-                specific_user = specific_user,)
+                specific_user = specific_user)
 
     else:
 
