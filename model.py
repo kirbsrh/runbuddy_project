@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, DateTime, update
 from sqlalchemy.sql import func
 from faker import Faker
+from hashlib import md5
 #myGenerator = Faker()
 #myGenerator.random.seed(5467)
 
@@ -54,6 +55,13 @@ class User(db.Model):
 
         return "<user_id={} name={} email={} password={}".format(
         self.user_id, self.name, self.email, self.password)
+
+    def avatar(self,size):
+        """set avatars for users"""
+
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+            digest, size)
 
 
 

@@ -8,6 +8,8 @@ from jinja2 import StrictUndefined
 from flask import (Flask, render_template, redirect, request, flash, session, jsonify, url_for)
 from flask_debugtoolbar import DebugToolbarExtension
 
+from hashlib import md5
+
 from model import User, Message, Compatibility, connect_to_db, db
 from similarity import euclid, square_rooted, cosine_similarity, corrcoef
 from search_functions import get_radius, get_pace, calculate_search_grid
@@ -324,7 +326,7 @@ def show_specific_user_profile(user_id):
     user_id = user.user_id
 
     return render_template("/user_info.html", name = name,
-        pace = pace, run_type = run_type, user_id = user_id)
+        pace = pace, run_type = run_type, user_id = user_id, user=user)
 
 @app.route("/send_message/<user_id>", methods = ["GET"])
 def show_message_form(user_id):
@@ -334,6 +336,7 @@ def show_message_form(user_id):
 
     name = user.name
     user_id = user.user_id
+
     print(user)
 
     return render_template("/send_message.html", name = name, user_id = user_id)
@@ -403,7 +406,7 @@ def show_messages():
                 sender_name = sender_info.name
 
             return render_template("messages.html", message_list = message_list,
-             sender_name = sender_name, sender_id = sender_id)
+             sender_name = sender_name, sender_id = sender_id, sender_info=sender_info)
 
     else:
 
@@ -453,7 +456,7 @@ def show_messages_with_specific_runner(user_id):
                 message.sender_name = str(sender_name) 
                 
             return render_template("message_history.html", message_list = message_list,
-                specific_user = specific_user)
+                specific_user = specific_user,)
 
     else:
 
