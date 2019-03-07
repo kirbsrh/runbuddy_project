@@ -8,18 +8,16 @@
 
     <form action="/messages_with_", >
 
-        <li>
+        <div class="mt-3">
         
-            Sent from: {{message.sender_name}}<br>
+            Sent from:<br>
+            <img src="{{sender_info.avatar(36)}}"><br>
+            {{message.sender_name}}<br>
             Sent time: {{ message.time_created }}<br>
-            Message: {{ message.message }} <br><br>
-
-        
-
-            <br/><br/>
+            Message: {{ message.message }}
       
 
-        </li>
+        </div>
 {% endfor %}
 
     </form>

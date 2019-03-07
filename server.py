@@ -450,9 +450,9 @@ def show_messages_with_specific_runner(user_id):
             for message in message_list:
                 sender_id = message.sender_id
                 print (sender_id)
-                sender_info = User.query.get(sender_id)
-                print (sender_info)
-                sender_name = sender_info.name
+                sender_stuff = User.query.get(sender_id)
+                print (sender_stuff)
+                sender_name = sender_stuff.name
                 message.sender_name = str(sender_name) 
                 
             return render_template("message_history.html", message_list = message_list,
