@@ -3,19 +3,19 @@
 
 
 
-<h1>My RunBuddy Details</h1>
+<h1 class="text-center">My RunBuddy Details</h1>
 
 <body>
 
-    <div id = current-details>
-    <img src="{{user.avatar(128)}}"><br>
-    Name: {{ user.name }}<br>
-    Email address: {{user.email}}<br>
-    Address: {{user_address}}<br>
-    Pace: {{ user.pace }} <br>
-    Run type preference: {{user.run_type}} <br>
-    <br>
-    <button id="toggleEditButton" type="button">
+    <div class="text-center" id = current-details>
+        <img src="{{user.avatar(128)}}"><br>
+        <b>Name:</b> {{ user.name }}<br>
+        <b>Email address:</b> {{user.email}}<br>
+        <b>Address:</b> {{user_address}}<br>
+        <b>Pace:</b> {{ user.pace }} <br>
+        <b>Run type preference:</b> {{user.run_type}} <br>
+        <br>
+        <button id="toggleEditButton" type="button">
           Edit
         </button><br><br><br>
     </div>
@@ -23,22 +23,23 @@
 
 
 
-    <div id = "edit-fields">
+    <div class="text-center" id = "edit-fields">
 
         <form action="/send_details" method="post">
 
           
-            <label>Name:</label>
+            <label><b>Name:</b></label><br>
             <input type="text" name="name" value="{{ user.name if user.name != None else "" }}" /> <br><br>
           
-            <label>Email Address:</label>
+            <label><b>Email Address:</b></label><br>
             <input type="text" name="email" value="{{ user.email if user.email != None else "" }}"/><br><br>
 
-            <label>Address:</label>
-            <textarea rows="4" columns = "50" name="address">{{ user_address if user_address != None else "" }}</textarea>/><br><br>
+            <label><b>Address:</b></label><br>
+            <textarea rows="4" columns = "50" name="address">{{ user_address if user_address != None else "" }}</textarea><br><br>
 
-            Please select the pace closest to your average mile pace in minutes below:
-            <select name = "pace">
+            <b>Please select the pace closest to your average mile pace in minutes below:</b><br>
+            <select id="inputPace" name="pace">
+            <option selected>Choose...</option>
             <option value = "6:00">6:00</option>
             <option value = "6:15">6:15</option>
             <option value = "6:30">6:30</option>
@@ -66,8 +67,9 @@
             <option value = "12:00">12:00</option>
             </select>
             <br/><br/>
-            Please select your running preference:
-            <select name ="run_type">
+            <b>Please select your running preference:</b>
+            <select id="inputRun" name="run_type">
+            <option selected>Choose...</option>
             <option value = "road">road</option>
             <option value = "trail">trail</option>
             <option value = "both">both</option>
