@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<head>
+<h2 class="text-center">Login</h2>
+<head>
 <body>
-<h2>Login</h2>
-
-  <form class ="form-signin text-center col-4" action="/user_login", method = "POST">
+<div class="text-center">
+  <center><form  class ="text-center col-4"  action="/user_login", method = "POST">
 
     
       <label for="email" class="sr-only">Email address</label>
@@ -18,6 +20,8 @@
   {% for message in get_flashed_messages() %}
     <li>{{ message }}</li>
   {% endfor %}
-  </form>
+  
+  </form></center>
+</div>
 </body>
 {% endblock %}
