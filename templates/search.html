@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2>Search</h2>
+<h2 class="text-center">Search</h2>
 
-<form action="/show_results" id = "search-form" method = "GET">
+<form class="text-center mt-3 container" action="/show_results" id = "search-form" method = "GET">
     I want to search for runners within 
-    <select name = "distance">
+        <select id="inputDistance" name="distance" class="col-2">
+        <option selected>Choose...</option>
         <option value = "1">1</option>
         <option value = "3">3</option>
         <option value = "5">5</option>
@@ -14,11 +15,12 @@
         <option value = "15">15</option>
         <option value = "20">20</option>
         <option value = "25">25</option>
-    </select>mile(s) of my address.
+        </select>mile(s) of my address.
     
     <br/> <br/>
     I am looking for runners who run, on average, a 
-    <select name = "pace">
+        <select class="col-2" id="inputPace" name="pace">
+        <option selected>Choose...</option>
         <option value = "6:00">6:00</option>
         <option value = "6:15">6:15</option>
         <option value = "6:30">6:30</option>
@@ -49,7 +51,6 @@
 
     <input type="hidden" name="page" value="1">
 
-    <br/><br/>
     <input type="submit" name = "submit"
      value ="Find my buddy!">
 

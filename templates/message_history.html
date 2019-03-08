@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>My Messages with {{specific_user.name}}</h1>
+<h1 class="text-center">My Messages with {{specific_user.name}}</h1>
 
 {% for message in message_list %}
 
 
-    <form action="/messages_with_", >
+    <form class="text-center" action="/messages_with_", >
 
         <div class="mt-3">
         
-            Sent from:<br>
-            <img src="{{sender_info.avatar(36)}}"><br>
+            <b>Sent from:</b>
+            
             {{message.sender_name}}<br>
-            Sent time: {{ message.time_created }}<br>
-            Message: {{ message.message }}
+            <b>Date Sent:</b> 
+            <script>document.write(moment('{{message.time_created}}').format('LLLL'));
+        	</script><br>
+            <b>Message:</b> {{ message.message }}
       
 
         </div>
