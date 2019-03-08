@@ -4,10 +4,14 @@
 
 
 <form class="text-center" action="/message">
-
-<h1>My Messages</h1>
+<head>
+    <h1>My Messages</h1>
+  
+</head>
 
 {% for message in message_list %}
+
+
 
 
 
@@ -16,8 +20,12 @@
     <div class="mb-4">
         <img src="{{sender_info.avatar(36)}}"><br>
         <b>Sent from:</b> {{sender_name}}<br>
-        <b>Date Sent:</b> {{ message.time_created.strftime('%m-%d-%Y') }}<br>
-        <b>Time Sent:</b> {{ message.time_created.strftime('%H:%M') }}<br>
+        
+        <b>Date Sent:</b>
+        
+        <script>document.write(moment('{{message.time_created}}').format('LLLL'));
+        </script>
+        <br>
         <b>Message:</b> {{ message.message }} <br>
 
         <input type="hidden" name="sender_id" value="{{sender_id}}">
@@ -27,6 +35,7 @@
         <a href="/messages_with_/{{sender_id}}"> message history</a> with {{sender_name}}<br>
 
     </div>
+
 
 {% endfor %}
 
