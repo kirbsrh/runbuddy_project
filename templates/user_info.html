@@ -2,19 +2,19 @@
 {% block content %}
 
 
-<h1>Is {{name}} your new RunBuddy?</h1>
+<h1 class="text-center mb-5">Is {{name}} your new RunBuddy?</h1>
 
-<form action="/user_info", >
-	<img src="{{user.avatar(36)}}"><br>
-    Name: {{name}}<br>
-    Pace: {{pace}} <br>
-    Run type preference: {{run_type}}<br><br>
+<center><form action="/user_info", >
+	<img src="{{user.avatar(135)}}" class="mb-3"><br>
+    <b>Name:</b> {{name}}<br>
+    <b>Pace:</b> {{pace}} <br>
+    <b>Run type preference:</b> {{run_type}}<br><br>
     <a href="/send_message/{{user_id}}">Send {{name}} a message!</a>
     <br>
 
 
 
-</form>
+</form></center>
 
 
 {% endblock %}

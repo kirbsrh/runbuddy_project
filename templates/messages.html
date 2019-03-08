@@ -5,7 +5,7 @@
 
 <form class="text-center" action="/message">
 <head>
-    <h1>My Messages</h1>
+    <h1 class="mb-3">My Messages</h1>
   
 </head>
 
@@ -17,8 +17,8 @@
 
 
 
-    <div class="mb-4">
-        <img src="{{sender_info.avatar(36)}}"><br>
+    <div class="mb-4 mt-4">
+        <img src="{{sender_info.avatar(60)}}"><br>
         <b>Sent from:</b> {{sender_name}}<br>
         
         <b>Date Sent:</b>
@@ -26,7 +26,9 @@
         <script>document.write(moment('{{message.time_created}}').format('LLLL'));
         </script>
         <br>
-        <b>Message:</b> {{ message.message }} <br>
+        <div class="mb-4">
+            <b>Message:</b> {{ message.message }} <br>
+        </div>
 
         <input type="hidden" name="sender_id" value="{{sender_id}}">
 

@@ -404,6 +404,8 @@ def show_messages():
                 sender_id = message.sender_id
                 sender_info = User.query.get(sender_id)
                 sender_name = sender_info.name
+                message.sender_name = sender_name
+
 
             return render_template("messages.html", message_list = message_list,
              sender_name = sender_name, sender_id = sender_id, sender_info=sender_info)
@@ -453,10 +455,11 @@ def show_messages_with_specific_runner(user_id):
                 sender_stuff = User.query.get(sender_id)
                 print (sender_stuff)
                 sender_name = sender_stuff.name
-                message.sender_name = str(sender_name) 
+                message.sender_name = str(sender_name)
+                message.sender_stuff=sender_stuff
                 
             return render_template("message_history.html", message_list = message_list,
-                specific_user = specific_user)
+                specific_user = specific_user, sender_stuff=sender_stuff)
 
     else:
 

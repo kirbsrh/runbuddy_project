@@ -5,7 +5,7 @@
 <container>
 
 <br>
-  <div id="mapdiv" class="col-sm-8 ml-3 mr-3 text-center float-right" style="height:1000px; width: 1000px;">
+  <div id="mapdiv" class="col-sm-7 ml-3 mr-3 text-center float-right" style="height:1000px; width: 1000px;">
     <b>Click on a marker to view which runner it represents!</b>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script> 
   </div>
@@ -75,7 +75,7 @@
 
 </script>
 
-  <div  class="text-center ml-3 col-sm-4">
+  <div  class="text-center ml-3 col-sm-5">
 
   <b>These are the runners who fit your search criteria:</b>
   <br>
@@ -83,14 +83,14 @@
     {% for user in user_list %}
     <form action="/user_info">
 
-      <li class="b-1">
-        <a href="/user_info/{{user.user_id}}">{{ user.name }}</a><br>
+      <div class="b-1 mt-3 mb-3">
+        <img src="{{user.avatar(36)}}"class="mr-3"><a href="/user_info/{{user.user_id}}">{{ user.name }}</a><br>
         
         Pace: {{ user.pace }} <br>
         
         Compatibility Rating: {{user.compatibility_rating}} <br>
         
-      </li>
+      </div>
 
     {% endfor %}
 
