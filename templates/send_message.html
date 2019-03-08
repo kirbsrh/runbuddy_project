@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h2 id = "second-header">Send a message to {{name}}!</h2>
+<h2 class="text-center"id = "second-header">Send a message to {{name}}!</h2>
 
-<form id = "message-form" action="/send_message", method = "POST">
+<form class="text-center" id = "message-form" action="/send_message", method = "POST">
 
     <input type="hidden" name="receiver_id" value="{{user_id}}">
     
@@ -18,7 +18,7 @@
 </form>
 
 <br><br><br>
-<div id = "showMessageDiv">
+<div class="text-center"id = "showMessageDiv">
     Hooray! The message you sent is below.  Don't forget to view your messages later
      to see if you have a response.<br><br>
         <textarea disabled id = "sent-message-span" name="message-was-sent" rows="10" cols="30">

@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h2>Welcome to Runbuddy, {{user_name}}!</h2>
+ <h2 class="text-center">Welcome to Runbuddy, {{user_name}}!</h2>
+ <body class="text-center">
+  	<div class="container">
+	  Please take a moment to complete our Runner Compatability Intake form <a href="http://127.0.0.1:5000/runner_compatibility">here.</a>  This helps us to determine which of the runners who meet your search criteria would be a good fit! <br><br>
 
-  Please take a moment to complete our Runner Compatability Intake form <a href="http://127.0.0.1:5000/runner_compatibility">here.</a>  This helps us to determine which of the runners who meet your search criteria would be a good fit! <br><br>
 
+	  If you would like to go ahead and start your search for a Runbuddy, please click <a href="http://127.0.0.1:5000/search">here.</a>
 
-  If you would like to go ahead and start your search for a Runbuddy, please click <a href="http://127.0.0.1:5000/search">here.</a>
+		<br><br>
 
-<br><br>
+		If you would like to view or change your profile details, please select the appropriate link for the navigation bar at the top of the page.
+	</div>
+</body>
 
-If you would like to view or change your profile details, please select the appropriate link for the navigation bar at the top of the page.
 
 {% endblock %}

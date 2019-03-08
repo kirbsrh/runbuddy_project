@@ -3,7 +3,7 @@
 
 
 
-<form action="/message">
+<form class="text-center" action="/message">
 
 <h1>My Messages</h1>
 
@@ -13,18 +13,18 @@
 
 
 
-    <div>
-        <img src="{{message.avatar}}"><br>
-        Sent from: {{sender_name}}<br>
-        Sent time: {{ message.time_created }}<br>
-        Message: {{ message.message }} <br><br>
+    <div class="mb-4">
+        <img src="{{sender_info.avatar(36)}}"><br>
+        <b>Sent from:</b> {{sender_name}}<br>
+        <b>Date Sent:</b> {{ message.time_created.strftime('%m-%d-%Y') }}<br>
+        <b>Time Sent:</b> {{ message.time_created.strftime('%H:%M') }}<br>
+        <b>Message:</b> {{ message.message }} <br>
 
         <input type="hidden" name="sender_id" value="{{sender_id}}">
 
-        <br/><br/>
-        <a href="/send_message/{{sender_id}}">Reply to {{sender_name}}</a><br>
-        <br/><br/>
-        <a href="/messages_with_/{{sender_id}}">Show my message history with {{sender_name}}</a><br>
+        <a href="/send_message/{{sender_id}}">Reply</a> to {{sender_name}}<br>
+        Show my
+        <a href="/messages_with_/{{sender_id}}"> message history</a> with {{sender_name}}<br>
 
     </div>
 
