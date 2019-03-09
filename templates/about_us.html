@@ -1,22 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<head>
+<style>
+body{
+	color:black;
+}
+body.container {
+  background: url(/static/images/startingline.jpeg) no-repeat center center;
+  background-size: cover;
 
-<h1>About RunBuddy</h1>
+}
 
-<body>
-    <p>
-    Runbuddy began in February 2018 as the Hackbright Academy project designed by Kirby Hutton.  Kirby is a former collegiate athlete and enjoys running in her spare time.  That being said, the timing aspect of free time can be quite unpredictable.  Meet ups and running groups are highly scheduled by nature.  On top of that, as any introvert can attest, group events can be intimidating and not a conducive to form of running motivation.
-    </p>
-    <br>
-    <p>
-    RunBuddy provides something more.  Runbuddy was built for people who seek the accountability that running with someone else affords.  Not everyone has a close circle of running friends.  Runbuddy hopes to solve that problem by leveraging technology to create IRL connections. 
-
-    After moving to the suburbs Kirby found that she didn't have any running buddies close by.  Convenience being what it is, she found herself running less and less. From time to time she would pass other solo runners and think to herself, "<i>Why can't I run with that person?</i>" This is how Runbuddy came to be what it is today.
-    </p>>  
-
-
-</body>
+</style>
+</head>
 
 
-{% endblock %}
+<body id="about-body"class="container">
+	<h2 class="text-center">About RunBuddy</h2>
+	<center><p class="col-6 mt-5">
+
+	    	Runbuddy began in February of 2019 as the Hackbright Academy project of Kirby Hutton.  Kirby is a former collegiate athlete who enjoys running in her spare time.  That being said, spare time can be rare and unpredictable.  Meet ups and running groups are great for those who can attend.  These events are highly scheduled by nature though, they do not cater to the needs of the individual.  On top of that, as any introvert can attest, group events can be <i>intimidating</i>.  This alone can act as a demotivator.
+	    </p>
+
+	      <p class="col-6">
+	    	After moving from San Francisco to the Peninsula Kirby found that she didn't have any running buddies close by.  Missing the camaraderie that running buddies provide, she found herself running less and less. When she did make it out for a run she would occassionally pass other solo runners and think to herself, "<i>Why can't I run with that person?</i>" This is how Runbuddy came to be what it is today.
+	    </p>
+	    
+	    <p class="col-6">
+	    	RunBuddy strives to be able to provide something more.  Runbuddy was built for individuals who seek the accountability that running with someone else affords.  Not everyone has a close circle of running friends. Runbuddy hopes to solve that problem by leveraging technology to create IRL connections.  Now, wherever you go, there is a RunBuddy to be found.
+	    </p></center> 
+
+
+	</body>
+
+
+	{% endblock %}

@@ -19,6 +19,11 @@
   color: white;
 }
 
+.about-body.container {
+  background: url(/static/images/goldengate.jpg) no-repeat center center;
+  background-size: cover;
+}
+
 
 
 
