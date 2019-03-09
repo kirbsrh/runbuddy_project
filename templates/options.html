@@ -1,24 +1,64 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<head>
+<style>
+
+div.jumbotron {
+	background-color: #E9B000;
+	color: white;
+}
+
+main {
+	background-color: #E9B000;
+	color: white;
+}
+
+body{
+	background-color: #E9B000;
+}
+
+#increase {
+
+	background-color: #EB6E80 ;
+
+	color: white;
+}
+
+#ready {
+	background-color: #E24E42;
+	color: white;
+}
+
+#pr {
+
+	background-color: #008F95;
+	color: white;
+
+}
+
+
+</style>
+</head>
+
  
  <main role="main">
   	<div class="jumbotron">
   		<div class="container">
-  			<h1 class="display-3">Welcome to Runbuddy,<br> {{user_name}}!</h1>
+  			<h1 class="display-3">Welcome to Runbuddy, {{first_name}}!</h1>
   		</div>
   	</div>
   	<div class="container">
   		<div class="row">
-  			<div class="col-md-4">
+  			<div id="increase" class="col-md-4">
   				<h2>Increase your odds</h2>
 				Please take a moment to complete our Runner Compatability Intake form <a href="http://127.0.0.1:5000/runner_compatibility">here.</a>  This helps us to determine which of the runners who meet your search criteria would be a good fit! <br><br>
 			</div>
-			<div class="col-md-4">
+			<div id="ready" class="col-md-4">
 				<h2>Ready...set...search!</h2>
 				If you would like to go ahead and start your search for a Runbuddy, please click <a href="http://127.0.0.1:5000/search">here.</a>
 			</div>
-			<div class="col-md-4">
+			<div id="pr"class="col-md-4">
 				<h2>Personal Record</h2>
 				If you would like to view or change your profile details, please select the appropriate link in the navigation bar at the top of the page.
 			</div>

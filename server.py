@@ -114,9 +114,11 @@ def verify_user_login():
 
         #save the user_name variable and pass this to confirmation page to display
         user_name = user.name
+        full_name_list = user_name.split()
+        first_name=full_name_list[0]
         
         flash("Logged in!")
-        return render_template('/options.html', user_name = user_name)
+        return render_template('/options.html', first_name = first_name)
 
     # if the user is not None but the passwords do not match have them try again 
     else:
