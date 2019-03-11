@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<head>
+<style>
 
+body{
+  background: url(/static/images/scrabble-letters.jpeg) no-repeat center center;
+  background-size: cover;
+
+}
+div, h1{
+    color:black;
+    background-color: white
+    opacity:.90;
+}
+
+
+</style>
+</head>
 
 <form class="text-center" action="/message">
-<head>
-    <h1 class="mb-3">My Messages</h1>
-  
-</head>
+
+    <h1 class="mt-3 mb-3">My Messages</h1>
+
 
 {% for message in message_list %}
 

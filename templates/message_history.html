@@ -1,6 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<head>
+<style>
+
+body{
+  background: url(/static/images/back-envelope.jpeg) no-repeat center center;
+  background-size: cover;
+
+}
+div, h1{
+    color:black;
+    background-color: white
+    opacity:.90;
+}
+
+
+</style>
+</head>
+
 <h1 class="text-center">My Messages with {{specific_user.name}}</h1>
 
 {% for message in message_list %}

@@ -2,15 +2,28 @@
 {% block content %}
 
 <head>
+<style>
 
+body{
+  background: url(/static/images/figurines.jpg) no-repeat center center;
+  background-size: auto;
+}
+
+h1{
+    color: white;
+}
+
+div{
+    color: white;
+}
+
+</style>
 </head>
-
-<h1 class="text-center">My RunBuddy Details</h1>
+<h1 class="text-center mb-3">My RunBuddy Details</h1>
 
 <center><body>
 
     <div class="text-center" id = current-details>
-        <img src="{{user.avatar(128)}}"><br>
         <b>Name:</b> {{ user.name }}<br>
         <b>Email address:</b> {{user.email}}<br>
         <b>Address:</b> {{user_address}}<br>

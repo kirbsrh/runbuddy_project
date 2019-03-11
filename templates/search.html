@@ -1,12 +1,34 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<head>
+<style>
 
-<h2 class="text-center">Search</h2>
+body{
+  background: url(/static/images/dots.jpeg) no-repeat center center;
+  background-size: cover;
 
-<form class="text-center mt-3 container" action="/show_results" id = "search-form" method = "GET">
+}
+h2{
+    color:white;
+   
+}
+
+#search-form {
+    color: white;
+    
+}
+
+
+</style>
+</head>
+
+
+<h2 class="text-center mb-3 display-4">Search</h2>
+
+<form class="text-center mb-3" action="/show_results" id = "search-form" method = "GET">
     I want to search for runners within 
-        <select id="inputDistance" name="distance" class="col-2">
+        <select id="inputDistance" name="distance" >
         <option selected>Choose...</option>
         <option value = "1">1</option>
         <option value = "3">3</option>
@@ -20,7 +42,7 @@
     
     <br/> <br/>
     I am looking for runners who run, on average, a 
-        <select class="col-2" id="inputPace" name="pace">
+        <select id="inputPace" name="pace">
         <option selected>Choose...</option>
         <option value = "6:00">6:00</option>
         <option value = "6:15">6:15</option>
