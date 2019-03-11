@@ -37,12 +37,12 @@ def calculate_search_grid():
     center_user_name = center_user.name
     #get lat and longitude for center user
     my_lat = center_user.lat
-    my_long =center_user.lng 
+    my_long = center_user.lng 
 
     radius = get_radius()
-    print(radius)
+    
     pace = get_pace()
-    print(pace)
+    
 
     df = (radius/69)
 

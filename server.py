@@ -239,7 +239,11 @@ def calculate_compatibility_for_user_list():
         center_response_list = []
 
         if center_user_responses == None:
-            pass
+            for user in user_list:
+                compatibility_rating = "Not found"
+                user.compatibility_rating = (compatibility_rating)
+                
+
         else:
             #query database for answers to questions
             center_activity = center_user_responses.activity_quest
@@ -270,7 +274,7 @@ def calculate_compatibility_for_user_list():
                 user_responses = Compatibility.query.get(user.user_id)
 
                 if user_responses == None:
-                    user.compatibility_rating = "Not found"
+                    pass
 
                 else:
                     user_response_list = []
@@ -310,7 +314,7 @@ def calculate_compatibility_for_user_list():
                
                     user.compatibility_rating = str(compatibility_rating) + "%"
             
-            return render_template("/display_runner_info.html", user_list = user_list, my_lat = my_lat, my_long = my_long,
+        return render_template("/display_runner_info.html", user_list = user_list, my_lat = my_lat, my_long = my_long,
         center_user= center_user, total_search_results=total_search_results, page=page, total_pages=total_pages,
         distance=distance, pace=pace)
 
