@@ -19,10 +19,37 @@
   color: white;
 }
 
-.about-body.container {
-  background: url(/static/images/goldengate.jpg) no-repeat center center;
-  background-size: cover;
+
+body{ 
+      font-family: 'Fjalla One', sans-serif;
+      color:#484A47;
+      background-color:white;
+       }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fjalla One', sans-serif;
+  color:#484A47;
+   
 }
+
+div {
+  
+  color:#484A47;
+}
+.container{
+  font-family: 'Fjalla One', sans-serif;
+  color:#484A47;
+  
+}
+
+p{
+  font-family: 'Fjalla One', sans-serif;
+  color:#484A47;
+
+}
+
+
+
 
 
 

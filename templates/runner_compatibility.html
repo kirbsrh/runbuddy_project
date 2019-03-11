@@ -1,41 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
+
+
 <head>
-<style> 
-body, html {
-  height: 100%;
+<style>
+body.container {
+  background: url(/static/images/shoes.jpg)no-repeat center center;
+  background-size: cover;
+  opacity: 0.65
+ 
 }
 
-/* Add styles to the form container */
-.container {
-  position: absolute;
-  left: 0;
-  margin: 20px;
-  max-width: 300px;
-  padding: 16px;
-  background-color: white;
+#bod{
+    color:black;
+    font-weight: bolder;
 }
-img.bg{
-    min-height: 100%;
-    min-width: 1024px;
-    width: 100%;
-    height: auto;
-    position: fixed;
-    top: 0;
-    left: 0;
+
+p{
+    color:black;
+}
+h1{
+    color: black;
+}
+
+}
+form{
+    color:black;
 }
 </style>
+
 </head>
-<img src="/static/images/Trail-Running-Two.jpg" alt="bckgound" class="bg" />
-
-    <div class="container">
-        <h1>Runner Compatibility Intake Form</h1>
 
 
+    <body id="bod"class="container text-right">
+        <h1 class="text-center">Runner Compatibility Intake Form</h1>
+        
 
 
 
-        Please complete the below form to the best of your ability.  We will use this data to determine how compatible you are with the runners who appear in your search results.  <br><br>
+
+        <p class="text-center">
+        Please complete the below form to the best of your ability.  We will use this data to determine how compatible you are with the runners who appear in your search results. 
+        </p>
         
             <form action="/runner_compatibility", method = "POST">
                 
@@ -73,7 +79,7 @@ img.bg{
                     <input type="radio" name="dogs" value="1">Um, no. Just no.<br>
                     <br>
                 7. I love running with my jogging stroller:<br>
-                    <input type="radio" name="kids" value="3" required>Yep! There is no such thing as "me-time", plus who doesn't love a built in strength training sesh?<br>
+                    <input type="radio" name="kids" value="3" required>Yep! There is no such thing as "me-time",<br> plus who doesn't love a built in strength training sesh?<br>
                     <input type="radio" name="kids" value="2">Take it or leave it.<br>
                     <input type="radio" name="kids" value="1">My cats aren't really into the whole stroller-thing.  <br>
                     <br>
@@ -100,7 +106,7 @@ img.bg{
     
 
     <br><br>
-</div>
+</body>
 
 
 
