@@ -4,102 +4,102 @@
 
 <head>
 <style>
-body.container {
-  background: url(/static/images/shoes.jpg)no-repeat center center;
-  background-size: cover;
- 
+
+.container{
+    width: 1000px;
 }
 
-h1{
-    color: black
+form{
+    width: 250px;
 }
-#blurb{
-    color: black
-}
-#form{
-    color: black
-}
-
+div{float: left;
+    display: block;
+    width: 250px;
+    margin-bottom: 25px}
 
 </style>
 
 </head>
 
 
-    <body id="bod"class="container text-right">
+    <body id="bod"class="container text-center">
         <h1 class="text-center">Runner Compatibility Intake Form</h1>
         
-
-
-
-
         <p id="blurb"class="text-center">
-        Please complete the below form to the best of your ability.  We will use this data to determine how compatible you are with the runners who appear in your search results. 
+        Please complete the below form to the best of your ability.<br>  We will use this data to determine how compatible you are with the runners who appear in your search results. 
         </p>
         
             <form id="form"action="/runner_compatibility", method = "POST">
-                
+                <div class="text-left">
                 1.  I consider myself to be:<br>
-                    <input type="radio" name="activity_level" value="3" required> Very active<br>
-                     <input type="radio" name="activity_level" value="2">Somewhat active<br>
-                    <input type="radio" name="activity_level" value="1">Not all that active<br>
-                    <br>
-
+                    <input type="radio" name="activity_level" value="3" required> Swol.<br>
+                     <input type="radio" name="activity_level" value="2">Not tight but 'aight.<br>
+                    <input type="radio" name="activity_level" value="1">3/4 sloth.
+                </div>
+                <div class="text-left">
                 2. I enjoy talking while running:<br>
                     <input type="radio" name="talking" value="3" required>Duh!<br>
                     <input type="radio" name="talking" value="2">I'm open to it, but I don't need it.<br>
-                    <input type="radio" name="talking" value="1">Hard no.<br>
-                    <br>
-
+                    <input type="radio" name="talking" value="1">Hard no.
+                </div>
+                <div class="text-left">
                 3. I enjoy running in all kinds of weather:<br>
                     <input type="radio" name="weather" value="3" required>Chyeah! Rain, sleet, snow, sun - I'm there!<br>
                     <input type="radio" name="weather" value="2">How much weather are we talking about?<br>
-                    <input type="radio" name="weather" value="1">Precipitation? Barf.<br>
-                    <br>
+                    <input type="radio" name="weather" value="1">Precipitation? Barf.
+                    
+                </div>
+                <div class="text-left">
                 4. Distance running is my jam:<br>
                     <input type="radio" name="distance" value="3" required>Yaaasss! Long and strong is my motto.<br>
                     <input type="radio" name="distance" value="2">When I have been training for it, sure!<br>
-                    <input type="radio" name="distance" value="1">If by distance you mean short distance then YES!<br>
-                    <br>
-
+                    <input type="radio" name="distance" value="1">If by distance you mean short distance then YES!
+                </div>
+                <div class="text-left">
                 5. I'm open to track workouts:<br>
                     <input type="radio" name="track" value="3" required>Woot!  4x800s all day, son!<br>
                     <input type="radio" name="track" value="2">A little speed workout couldn't hurt.<br>
-                    <input type="radio" name="track" value="1">You mean like Strava?  I mean, isn't that dangerous?<br>
-
+                    <input type="radio" name="track" value="1">You mean like Strava?  I mean, isn't that dangerous?
+                </div>
+                <div class="text-left">
                 6. I love running with my furry friend:<br>
                     <input type="radio" name="dogs" value="3" required>You know it!  My four-legged friend is my original Runbuddy!<br>
                     <input type="radio" name="dogs" value="2">I don't have a dog to run with but always thought it would be saaaweeet!<br>
-                    <input type="radio" name="dogs" value="1">Um, no. Just no.<br>
-                    <br>
+                    <input type="radio" name="dogs" value="1">Um, no. Just no.
+                </div>
+                <div class="text-left">
                 7. I love running with my jogging stroller:<br>
-                    <input type="radio" name="kids" value="3" required>Yep! There is no such thing as "me-time",<br> plus who doesn't love a built in strength training sesh?<br>
+                    <input type="radio" name="kids" value="3" required>Yep! There is no such thing as "me-time", plus who doesn't love a built in strength training sesh?<br>
                     <input type="radio" name="kids" value="2">Take it or leave it.<br>
-                    <input type="radio" name="kids" value="1">My cats aren't really into the whole stroller-thing.  <br>
-                    <br>
+                    <input type="radio" name="kids" value="1">My cats aren't really into the whole stroller-thing.
+                </div>
+                <div class="text-left">
                 8. I run best with headphones:<br>
                     <input type="radio" name="music" value="3" required>Totes.  My theory is that if my music is loud enough I won't be able to hear my legs screaming.<br>
                     <input type="radio" name="music" value="2">Maybe on a longer run but I don't need them.<br>
-                    <input type="radio" name="music" value="1">Those things should be banned.  BANNED.<br>
-                    <br>
+                    <input type="radio" name="music" value="1">Those things should be banned.  BANNED.
+                </div>
+                <div class="text-left">
                 9. I am currently training for a race:<br>
                     <input type="radio" name="current_race" value="3" required>A race? try three. Get on my level.<br>
                     <input type="radio" name="current_race" value="2">No, but I have been looking at signing up for a few.<br>
-                    <input type="radio" name="current_race" value="1">You want me to pay to run? That is so corporate. Ew.<br>
-                    <br>
-                10. I run...:<br>
+                    <input type="radio" name="current_race" value="1">You want me to pay to run? That is so corporate. Ew.
+                </div>
+                <div class="text-left">
+                10. I run:<br>
                     <input type="radio" name="why" value="3" required>for fitness, HOO-AH!<br>
-                    <input type="radio" name="why" value="2">the sake of my sanity.  Therapists are <i>hella</i> expensive.<br>
+                    <input type="radio" name="why" value="2">for the sake of my sanity.  Therapists are <i>hella</i> expensive.<br>
                     <input type="radio" name="why" value="1">when animals/kids/managers chase me. Period.<br>
                     <br/><br/>
                     <input type="submit" value ="Done! ">
+                </div>
                 
 
 
             </form>
     
 
-    <br><br>
+    
 </body>
 
 
