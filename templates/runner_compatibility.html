@@ -7,26 +7,20 @@
 body.container {
   background: url(/static/images/shoes.jpg)no-repeat center center;
   background-size: cover;
-  opacity: 0.65
  
 }
 
-#bod{
-    color:black;
-    font-weight: bolder;
-}
-
-p{
-    color:black;
-}
 h1{
-    color: black;
+    color: black
+}
+#blurb{
+    color: black
+}
+#form{
+    color: black
 }
 
-}
-form{
-    color:black;
-}
+
 </style>
 
 </head>
@@ -39,11 +33,11 @@ form{
 
 
 
-        <p class="text-center">
+        <p id="blurb"class="text-center">
         Please complete the below form to the best of your ability.  We will use this data to determine how compatible you are with the runners who appear in your search results. 
         </p>
         
-            <form action="/runner_compatibility", method = "POST">
+            <form id="form"action="/runner_compatibility", method = "POST">
                 
                 1.  I consider myself to be:<br>
                     <input type="radio" name="activity_level" value="3" required> Very active<br>

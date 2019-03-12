@@ -2,9 +2,24 @@
 {% block content %}
 
 <head>
-<h2 class="text-center">Login</h2>
+<style>
+  body{
+  background: url(/static/images/solo-runner.jpg) no-repeat center center;
+  background-size: cover;
+}
+h2{
+  color: black;
+}
+div{
+  color: black;
+}
+label{
+  color: black;
+}
+</style>
 <head>
 <body>
+<h2 class="text-center">Login</h2>
 <div class="text-center">
   <center><form  class ="text-center col-4"  action="/user_login", method = "POST">
 
