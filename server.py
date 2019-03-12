@@ -274,7 +274,9 @@ def calculate_compatibility_for_user_list():
                 user_responses = Compatibility.query.get(user.user_id)
 
                 if user_responses == None:
-                    pass
+                    
+                    compatibility_rating = "Not found"
+                    user.compatibility_rating = (compatibility_rating)
 
                 else:
                     user_response_list = []
