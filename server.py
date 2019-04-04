@@ -17,8 +17,6 @@ from search_functions import get_radius, get_pace, calculate_search_grid
 # Use Statsd, a Python client for DogStatsd
 from datadog import statsd
 
-# Increment a counter.
-statsd.increment('page.views')
 
 
 
@@ -199,6 +197,10 @@ def show_runner_profile():
 @app.route("/search")
 def display_search_page():
     """Show search page form """
+
+
+    # Increment a counter.
+    statsd.increment('page.views')
 
     return render_template("search.html")
 
