@@ -14,6 +14,12 @@ from model import User, Message, Compatibility, connect_to_db, db
 from similarity import euclid, square_rooted, cosine_similarity, corrcoef
 from search_functions import get_radius, get_pace, calculate_search_grid
 
+# Use Statsd, a Python client for DogStatsd
+from datadog import statsd
+
+# Increment a counter.
+statsd.increment('page.views')
+
 
 
 app = Flask(__name__)
